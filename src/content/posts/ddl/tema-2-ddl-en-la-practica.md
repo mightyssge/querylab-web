@@ -1,12 +1,12 @@
 ---
 title: "Tema 2 · DDL en la práctica (cadena de cines)"
 published: 2026-06-16
-description: "Un caso real en Oracle: una cadena de cines. CREATE con reglas de negocio, ALTER en caliente y DROP con criterio. Acompaña al Video 2 del Sprint 1."
-tags: ["SQL", "DDL", "Oracle", "Sprint 1"]
+description: "Un caso real en Oracle: una cadena de cines. CREATE con reglas de negocio, ALTER en caliente y DROP con criterio. Acompaña al Video 2 de la Unidad 1."
+tags: ["SQL", "DDL", "Oracle"]
 category: "DDL"
 ---
 
-> Esta lectura acompaña al **Video 2** del Sprint 1. Reproduce el mismo ejercicio que puedes correr en [Oracle Live SQL](https://livesql.oracle.com).
+> Esta lectura acompaña al **Video 2** de la Unidad 1. Reproduce el mismo ejercicio que puedes correr en [Oracle Live SQL](https://livesql.oracle.com).
 
 Vamos a diseñar la base de una **cadena de cines**. Solo dos tablas, pero con las reglas que protegen al negocio: `funcion` (cada película en cartelera) y `venta` (cada butaca vendida).
 
@@ -110,7 +110,7 @@ Las tablas `venta` y `funcion` **no** se borran: se archivan, porque el negocio 
 
 > **Dos detalles clave de DDL en Oracle:** (1) `CREATE TABLE ... AS SELECT` copia columnas y tipos, pero **no** las restricciones (PK, FK, UNIQUE, CHECK). (2) Todo comando DDL hace **COMMIT implícito**: confirma de forma automática lo anterior y **no se puede deshacer con `ROLLBACK`**. Por eso el `ALTER` y los `CREATE` de arriba ya dejaron grabados los `INSERT` previos.
 
-## La lección del sprint
+## La lección de la unidad
 
 DDL no es teoría: cada `CREATE`, `ALTER` o `DROP` es una decisión de negocio.
 
@@ -118,4 +118,4 @@ DDL no es teoría: cada `CREATE`, `ALTER` o `DROP` es una decisión de negocio.
 - Con `ALTER`, el sistema **evoluciona** sin detenerse.
 - Con `DROP`, eliminas **solo lo que sobra**, con criterio.
 
-¿Listo? Vuelve al [Sprint 1](/sprint-1/) y completa el **formulario post** para cerrar la unidad.
+¿Listo? Vuelve a la [Unidad 1](/unidad-1/) y completa la **evaluación final** para cerrar la unidad.

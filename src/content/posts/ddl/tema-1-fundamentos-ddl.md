@@ -1,12 +1,12 @@
 ---
 title: "Tema 1 · Fundamentos de DDL"
 published: 2026-06-16
-description: "Qué es el DDL y cómo CREATE, ALTER y DROP definen la estructura de una base de datos. Acompaña al Video 1 del Sprint 1."
-tags: ["SQL", "DDL", "Oracle", "Sprint 1"]
+description: "Qué es el DDL y cómo CREATE, ALTER y DROP definen la estructura de una base de datos. Acompaña al Video 1 de la Unidad 1."
+tags: ["SQL", "DDL", "Oracle"]
 category: "DDL"
 ---
 
-> Esta lectura acompaña al **Video 1** del Sprint 1. Aquí tienes el mismo contenido para repasar a tu ritmo, con el SQL listo para copiar.
+> Esta lectura acompaña al **Video 1** de la Unidad 1. Aquí tienes el mismo contenido para repasar a tu ritmo, con el SQL listo para copiar.
 
 ## Las cuatro familias de SQL
 
@@ -19,7 +19,7 @@ Antes de hablar de DDL conviene ubicarlo. Todo comando de SQL pertenece a una de
 | **DQL** | *Data Query Language* | `SELECT` | La **consulta** (leer datos) |
 | **DCL** | *Data Control Language* | `GRANT`, `REVOKE` | Los **permisos** (quién puede qué) |
 
-La idea clave del sprint: **DDL no mueve datos, define el molde donde viven los datos.**
+La idea clave: **DDL no mueve datos, define el molde donde viven los datos.**
 
 ## ¿Qué es DDL?
 

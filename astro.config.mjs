@@ -185,6 +185,12 @@ export default defineConfig({
         plugins: [
             yaml(),
         ],
+        // PGlite trae su WASM + FS bundle vía new URL(...): el pre-bundling de Vite
+        // rompe esas URLs ("Invalid FS bundle size"). Hay que excluirlo del optimizer.
+        optimizeDeps: {
+            exclude: ["@electric-sql/pglite"],
+        },
+        worker: { format: "es" },
         build: {
             cssCodeSplit: true,
             cssMinify: isCI ? "lightningcss" : false,

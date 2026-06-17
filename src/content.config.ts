@@ -9,13 +9,17 @@ const postsCollection = defineCollection({
 		pattern: "**/*.{md,mdx}",
 		base: "./src/content/posts",
 		generateId: ({ entry, base }) => {
-			const entryPath =
-				typeof entry === "string" ? entry : fileURLToPath(entry);
-			const basePath = typeof base === "string" ? base : fileURLToPath(base);
+			const entryPath = path.resolve(
+				typeof entry === "string" ? entry : fileURLToPath(entry),
+			);
+			const basePath = path.resolve(
+				typeof base === "string" ? base : fileURLToPath(base),
+			);
 			const relativePath = path
 				.relative(basePath, entryPath)
 				.replace(/\.[^/.]+$/, "")
-				.replace(/\\/g, "/");
+				.replace(/\\/g, "/")
+				.replace(/^(\.\.\/)+/, "");
 			return relativePath;
 		},
 	}),

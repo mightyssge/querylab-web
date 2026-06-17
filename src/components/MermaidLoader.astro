@@ -1,0 +1,46 @@
+---
+// Carga Mermaid desde CDN y renderiza los bloques ```mermaid (pre.mermaid-src).
+// El template referencia window.initMermaid pero no traía el cargador.
+---
+<style is:global>
+	.mermaid-rendered { display: flex; justify-content: center; margin: 1.5rem 0; }
+	.mermaid-rendered svg { max-width: 100%; height: auto; }
+</style>
+<script is:inline type="module">
+	async function renderMermaid() {
+		const blocks = document.querySelectorAll("pre.mermaid-src:not([data-rendered])");
+		if (!blocks.length) return;
+		try {
+			const { default: mermaid } = await import(
+				"https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs"
+			);
+			mermaid.initialize({
+				startOnLoad: false,
+				theme: "neutral",
+				securityLevel: "strict",
+				fontFamily: "inherit",
+			});
+			let i = 0;
+			for (const el of blocks) {
+				el.setAttribute("data-rendered", "true");
+				try {
+					const { svg } = await mermaid.render(
+						"mmd-" + Date.now() + "-" + i++,
+						(el.textContent || "").trim(),
+					);
+					const fig = document.createElement("figure");
+					fig.className = "mermaid-rendered";
+					fig.innerHTML = svg;
+					el.replaceWith(fig);
+				} catch (e) {
+					console.warn("[mermaid] render", e);
+				}
+			}
+		} catch (e) {
+			console.warn("[mermaid] load", e);
+		}
+	}
+	window.initMermaid = renderMermaid;
+	document.addEventListener("astro:page-load", renderMermaid);
+	renderMermaid();
+</script>

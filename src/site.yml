@@ -14,14 +14,14 @@ profile:
   name: "Query Lab"
   bio: "Plataforma educativa de SQL — Universidad de Lima"
   links:
-    - name: "Sprint 1"
-      url: "/sprint-1/"
+    - name: "Unidad 1"
+      url: "/unidad-1/"
     - name: "Temas"
       url: "/archive/"
 
 nav:
   - Inicio: "/"
-  - Sprint 1: "/sprint-1/"
+  - Unidad 1: "/unidad-1/"
   - Temas: "/archive/"
   - Acerca: "/about/"
 

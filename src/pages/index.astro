@@ -3,26 +3,26 @@ import { siteConfig } from "../config";
 import Layout from "../layouts/Layout.astro";
 
 const metaDescription =
-	"Query Lab: plataforma educativa de la Universidad de Lima para aprender SQL paso a paso, al estilo Coursera. Sprint 1: DDL.";
+	"Query Lab: plataforma educativa de la Universidad de Lima para aprender SQL paso a paso, al estilo Coursera. Unidad 1: DDL.";
 
 const pasos = [
-	{ n: "1", t: "Encuesta pre", d: "Medimos tu punto de partida." },
-	{ n: "2", t: "Videos", d: "Cápsulas cortas y claras." },
-	{ n: "3", t: "Lecturas", d: "Los temas en formato blog, con SQL real." },
-	{ n: "4", t: "Formulario post", d: "Cierras con tu correo @ulima.edu.pe." },
+	{ n: "1", t: "Evaluación inicial", d: "Medimos tu punto de partida." },
+	{ n: "2", t: "Videos y lecturas", d: "Cápsulas cortas + el tema en detalle, en la misma pantalla." },
+	{ n: "3", t: "Practica SQL", d: "Escribe y ejecuta SQL real en el sandbox." },
+	{ n: "4", t: "Evaluación final", d: "Cierras con tu correo @ulima.edu.pe." },
 ];
 
-const sprints = [
+const unidades = [
 	{
-		n: "Sprint 1",
+		n: "Unidad 1",
 		t: "DDL — Definición de Datos",
 		d: "CREATE, ALTER y DROP: cómo se moldea la estructura de una base de datos con criterio de negocio.",
-		href: "/sprint-1/",
+		href: "/unidad-1/",
 		estado: "Disponible",
 		activo: true,
 	},
 	{
-		n: "Sprint 2",
+		n: "Unidad 2",
 		t: "DML — Manipulación de Datos",
 		d: "INSERT, UPDATE y DELETE: cómo se carga y mantiene la información del día a día.",
 		href: "",
@@ -30,7 +30,7 @@ const sprints = [
 		activo: false,
 	},
 	{
-		n: "Sprint 3",
+		n: "Unidad 3",
 		t: "DQL & DCL — Consulta y Control",
 		d: "SELECT para responder preguntas de negocio y GRANT/REVOKE para gobernar el acceso.",
 		href: "",
@@ -50,15 +50,15 @@ const sprints = [
 				Query Lab
 			</h1>
 			<p class="text-lg md:text-xl text-lt-muted max-w-[58ch] leading-relaxed">
-				Aprende SQL paso a paso, al estilo Coursera: cada sprint combina una evaluación,
-				videos cortos y lecturas prácticas. <strong class="text-lt-ink">Aprende con criterio de negocio</strong>,
+				Aprende SQL paso a paso, al estilo Coursera: cada unidad combina evaluación,
+				videos, lecturas y práctica ejecutable. <strong class="text-lt-ink">Aprende con criterio de negocio</strong>,
 				no solo sintaxis.
 			</p>
 			<a
-				href="/sprint-1/"
+				href="/unidad-1/"
 				class="mt-2 inline-block bg-primary text-white font-bold px-7 py-3 hover:opacity-90 transition-opacity"
 			>
-				Empezar el Sprint 1 →
+				Empezar la Unidad 1 →
 			</a>
 		</div>
 	</section>
@@ -81,7 +81,7 @@ const sprints = [
 		<div class="w-full max-w-[900px] flex flex-col gap-5">
 			<h2 class="text-2xl font-bold text-lt-ink">Ruta del curso</h2>
 			<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-				{sprints.map((s) => (
+				{unidades.map((s) => (
 					<div
 						class:list={[
 							"border p-5 flex flex-col gap-3 min-h-[220px]",

@@ -1,4 +1,4 @@
-// Helpers compartidos por los formularios nativos de Query Lab.
+// Helpers compartidos por los formularios y el sandbox de Query Lab.
 
 export function validateUlimaEmail(email: string): boolean {
 	return /^[^@\s]+@ulima\.edu\.pe$/i.test((email || "").trim());
@@ -11,7 +11,7 @@ export function normalizeEmail(email: string): string {
 
 export interface SurveyPayload {
 	tipo: "pre" | "post";
-	sprint: number;
+	unidad: number;
 	nombre?: string;
 	correo: string;
 	/** Texto de la opción elegida por pregunta (q1..q5). Para leer en la hoja. */
@@ -23,6 +23,14 @@ export interface SurveyPayload {
 	satisfaccion?: number;
 }
 
+export interface EjercicioPayload {
+	tipo: "ejercicios";
+	unidad: number;
+	correo: string;
+	ejercicio_id: string;
+	aprobado: boolean;
+}
+
 export interface SubmitResult {
 	ok: boolean;
 	demo?: boolean;
@@ -30,24 +38,22 @@ export interface SubmitResult {
 }
 
 /**
- * Envía la respuesta al Web App de Apps Script (Google Sheet).
+ * POST único en modo no-cors al Web App de Apps Script (Google Sheet).
  *
- * Diseño (sitio estático, sin servidor propio):
- * - Un Web App de Apps Script NO devuelve cabeceras CORS. Un fetch normal (mode "cors")
- *   ejecutaría el doPost (escribe la fila) y luego fallaría al leer la respuesta; un retry
- *   duplicaría la fila. Por eso usamos un único POST en modo "no-cors": la fila se escribe
- *   una sola vez y asumimos éxito (no podemos leer la respuesta cross-origin de todos modos).
- * - Content-Type text/plain => petición "simple", sin preflight.
- * - Si no hay endpoint configurado, modo demo (no guarda).
+ * El Web App NO devuelve cabeceras CORS: con un fetch normal el doPost escribiría
+ * la fila pero la lectura fallaría y un retry la duplicaría. Por eso un solo POST
+ * "no-cors" (respuesta opaca, la fila se escribe una vez y asumimos éxito).
+ * Content-Type text/plain => petición simple, sin preflight.
+ * Sin endpoint configurado => modo demo (no guarda).
  */
-export async function submitForm(payload: SurveyPayload): Promise<SubmitResult> {
+async function enviar(payload: object): Promise<SubmitResult> {
 	const endpoint = import.meta.env.PUBLIC_FORM_ENDPOINT as string | undefined;
 
 	if (!endpoint) {
 		console.warn(
-			"[Query Lab] PUBLIC_FORM_ENDPOINT vacío — modo demo: la respuesta NO se guarda.",
+			"[Query Lab] PUBLIC_FORM_ENDPOINT vacío — modo demo: no se guarda.",
 		);
-		await new Promise((r) => setTimeout(r, 500));
+		await new Promise((r) => setTimeout(r, 400));
 		return { ok: true, demo: true };
 	}
 
@@ -58,9 +64,28 @@ export async function submitForm(payload: SurveyPayload): Promise<SubmitResult> 
 			headers: { "Content-Type": "text/plain;charset=utf-8" },
 			body: JSON.stringify(payload),
 		});
-		// Respuesta opaca por no-cors: el POST se entregó y la fila se escribió una vez.
 		return { ok: true };
 	} catch (err) {
 		return { ok: false, error: String(err) };
 	}
+}
+
+export function submitForm(payload: SurveyPayload): Promise<SubmitResult> {
+	return enviar(payload);
+}
+
+/** Registra (no bloqueante) que un ejercicio fue aprobado/intentado. */
+export function enviarEjercicio(
+	correo: string,
+	ejercicioId: string,
+	aprobado: boolean,
+): Promise<SubmitResult> {
+	const payload: EjercicioPayload = {
+		tipo: "ejercicios",
+		unidad: 1,
+		correo: normalizeEmail(correo),
+		ejercicio_id: ejercicioId,
+		aprobado,
+	};
+	return enviar(payload);
 }

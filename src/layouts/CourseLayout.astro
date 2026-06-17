@@ -1,0 +1,189 @@
+---
+import { Icon } from "astro-icon/components";
+import type { Unidad } from "../data/curso";
+import Layout from "./Layout.astro";
+
+interface Props {
+	unidad: Unidad;
+	activeSlug: string;
+	title: string;
+	description?: string;
+}
+const { unidad, activeSlug, title, description } = Astro.props;
+---
+
+<Layout title={title} description={description}>
+	<div class="course-wrap">
+		<div class="course-grid">
+			<aside class="course-sidebar">
+				<div class="cs-head">
+					<span class="cs-eyebrow">Unidad {unidad.numero}</span>
+					<h2 class="cs-title">{unidad.titulo}</h2>
+					<div class="cs-progress"><div class="cs-progress-fill" id="cs-progress-fill"></div></div>
+					<span class="cs-progress-label" id="cs-progress-label">0 de {unidad.lecciones.length} completadas</span>
+				</div>
+				<nav class="cs-list" aria-label="Lecciones de la unidad">
+					{unidad.lecciones.map((l, i) => (
+						<a
+							href={`${unidad.basePath}/${l.slug}/`}
+							class:list={["cs-item", { "is-active": l.slug === activeSlug }]}
+							data-slug={l.slug}
+						>
+							<span class="cs-ico">
+								<Icon name={`material-symbols:${l.icon}`} />
+							</span>
+							<span class="cs-texts">
+								<span class="cs-item-title"><span class="cs-num">{i + 1}.</span> {l.titulo}</span>
+								{l.subtitulo && <span class="cs-item-sub">{l.subtitulo}</span>}
+							</span>
+							<span class="cs-check" aria-hidden="true">
+								<Icon name="material-symbols:check-circle-rounded" />
+							</span>
+						</a>
+					))}
+				</nav>
+			</aside>
+
+			<main class="course-main">
+				<slot />
+			</main>
+		</div>
+	</div>
+</Layout>
+
+<style>
+	.course-wrap {
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		padding: 4.5rem 1rem 5rem;
+	}
+	.course-grid {
+		width: 100%;
+		max-width: 1180px;
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 1.5rem;
+	}
+	@media (min-width: 1024px) {
+		.course-grid {
+			grid-template-columns: 280px minmax(0, 1fr);
+			gap: 2.5rem;
+			align-items: start;
+		}
+		.course-sidebar {
+			position: sticky;
+			top: 4.5rem;
+		}
+	}
+
+	.course-sidebar {
+		background: var(--card-bg);
+		border: 1px solid rgba(var(--ce-border) / 0.7);
+	}
+	.cs-head {
+		padding: 1.1rem 1.1rem 1rem;
+		border-bottom: 1px solid rgba(var(--ce-border) / 0.6);
+	}
+	.cs-eyebrow {
+		font-size: 0.7rem;
+		font-weight: 800;
+		text-transform: uppercase;
+		letter-spacing: 0.15em;
+		color: var(--primary);
+	}
+	.cs-title {
+		margin: 0.25rem 0 0.75rem;
+		font-size: 1.05rem;
+		font-weight: 800;
+		line-height: 1.25;
+		color: var(--deep-text);
+	}
+	.cs-progress {
+		height: 7px;
+		background: rgba(var(--ce-border) / 0.6);
+		overflow: hidden;
+	}
+	.cs-progress-fill {
+		height: 100%;
+		width: 0%;
+		background: var(--primary);
+		transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+	}
+	.cs-progress-label {
+		display: block;
+		margin-top: 0.4rem;
+		font-size: 0.74rem;
+		color: var(--lt-muted, #6b6456);
+	}
+
+	.cs-list {
+		display: flex;
+		flex-direction: column;
+	}
+	.cs-item {
+		display: flex;
+		align-items: center;
+		gap: 0.7rem;
+		padding: 0.8rem 1.1rem;
+		text-decoration: none;
+		color: var(--deep-text);
+		border-left: 3px solid transparent;
+		border-bottom: 1px solid rgba(var(--ce-border) / 0.35);
+		transition: background 0.15s, border-color 0.15s;
+	}
+	.cs-item:last-child { border-bottom: 0; }
+	.cs-item:hover { background: rgba(var(--ce-accent) / 0.06); }
+	.cs-item.is-active {
+		background: rgba(var(--ce-accent) / 0.1);
+		border-left-color: var(--primary);
+	}
+	.cs-ico {
+		flex-shrink: 0;
+		font-size: 1.25rem;
+		color: var(--primary);
+		display: grid;
+		place-items: center;
+	}
+	.cs-texts { display: flex; flex-direction: column; gap: 0.1rem; min-width: 0; flex: 1; }
+	.cs-item-title { font-weight: 700; font-size: 0.9rem; line-height: 1.3; }
+	.cs-num { color: var(--lt-muted, #6b6456); font-weight: 800; }
+	.cs-item-sub { font-size: 0.76rem; color: var(--lt-muted, #6b6456); line-height: 1.3; }
+	.cs-check {
+		flex-shrink: 0;
+		font-size: 1.2rem;
+		color: var(--primary);
+		opacity: 0;
+		transition: opacity 0.2s;
+	}
+	.cs-item.is-done .cs-check { opacity: 1; }
+	.cs-item.is-done .cs-ico { color: var(--lt-muted, #6b6456); }
+
+	.course-main { min-width: 0; }
+</style>
+
+<script>
+	import { leerProgreso } from "../scripts/progreso";
+	function sync() {
+		const p = leerProgreso();
+		const items = document.querySelectorAll<HTMLElement>(".cs-item");
+		let done = 0;
+		items.forEach((el) => {
+			const slug = el.dataset.slug;
+			if (slug && p.completed.includes(slug)) {
+				el.classList.add("is-done");
+				done++;
+			} else {
+				el.classList.remove("is-done");
+			}
+		});
+		const total = items.length;
+		const fill = document.getElementById("cs-progress-fill");
+		if (fill) fill.style.width = total ? `${(done / total) * 100}%` : "0%";
+		const label = document.getElementById("cs-progress-label");
+		if (label) label.textContent = `${done} de ${total} completadas`;
+	}
+	sync();
+	document.addEventListener("astro:page-load", sync);
+	window.addEventListener("querylab:progreso", sync);
+</script>

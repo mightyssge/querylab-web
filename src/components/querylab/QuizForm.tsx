@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { leerProgreso, marcarLeccion, setCorreo as guardarCorreo } from "../../scripts/progreso";
 import {
 	normalizeEmail,
 	type SurveyPayload,
@@ -10,22 +11,14 @@ import type { Question } from "./surveyData";
 interface Props {
 	tipo: "pre" | "post";
 	questions: Question[];
-	sprint?: number;
-	initialCorreo?: string;
-	onCompleted: (data: { correo: string; nombre?: string }) => void;
+	lessonSlug: string;
 }
 
-type Estado = "idle" | "sending" | "error";
+type Estado = "idle" | "sending" | "error" | "done";
 
-export default function QuizForm({
-	tipo,
-	questions,
-	sprint = 1,
-	initialCorreo = "",
-	onCompleted,
-}: Props) {
+export default function QuizForm({ tipo, questions, lessonSlug }: Props) {
 	const [nombre, setNombre] = useState("");
-	const [correo, setCorreo] = useState(initialCorreo);
+	const [correo, setCorreo] = useState("");
 	const [answers, setAnswers] = useState<Record<string, number>>({});
 	const [satisfaccion, setSatisfaccion] = useState<number>(0);
 	const [recomienda, setRecomienda] = useState<string>("");
@@ -34,6 +27,13 @@ export default function QuizForm({
 	const [errorMsg, setErrorMsg] = useState("");
 
 	const esPost = tipo === "post";
+
+	useEffect(() => {
+		// Prefill del correo (lo capturamos en la evaluación inicial).
+		const c = leerProgreso().correo;
+		if (c) setCorreo(c);
+		if (leerProgreso().completed.includes(lessonSlug)) setEstado("done");
+	}, [lessonSlug]);
 
 	function setAnswer(qid: string, idx: number) {
 		setAnswers((prev) => ({ ...prev, [qid]: idx }));
@@ -48,7 +48,7 @@ export default function QuizForm({
 				return "Responde todas las preguntas antes de enviar.";
 		}
 		if (esPost && satisfaccion === 0)
-			return "Indica tu nivel de satisfacción con el sprint.";
+			return "Indica tu nivel de satisfacción con la unidad.";
 		return null;
 	}
 
@@ -73,7 +73,7 @@ export default function QuizForm({
 
 		const payload: SurveyPayload = {
 			tipo,
-			sprint,
+			unidad: 1,
 			correo: correoNorm,
 			respuestas,
 			indices,
@@ -84,13 +84,35 @@ export default function QuizForm({
 
 		const result = await submitForm(payload);
 		if (result.ok) {
-			onCompleted({ correo: correoNorm, nombre: nombre.trim() || undefined });
+			guardarCorreo(correoNorm);
+			marcarLeccion(lessonSlug);
+			setEstado("done");
 		} else {
 			setErrorMsg(
 				"No pudimos guardar tu respuesta. Revisa tu conexión e inténtalo de nuevo.",
 			);
 			setEstado("error");
 		}
+	}
+
+	if (estado === "done") {
+		return (
+			<div className="ql-done">
+				<span className="ql-done-ico">✓</span>
+				<div>
+					<strong>
+						{esPost
+							? "¡Evaluación final enviada! Completaste la Unidad."
+							: "¡Listo! Registramos tu evaluación inicial."}
+					</strong>
+					<p>
+						{esPost
+							? "Gracias por terminar. Tus respuestas quedaron guardadas."
+							: "Ya podemos medir tu avance. Continúa con la siguiente lección."}
+					</p>
+				</div>
+			</div>
+		);
 	}
 
 	const correoInvalido = estado === "error" && !validateUlimaEmail(correo);
@@ -135,11 +157,7 @@ export default function QuizForm({
 								<span className="ql-q-num">{i + 1}.</span> {q.prompt}
 							</p>
 							{q.code && <pre className="ql-q-code">{q.code}</pre>}
-							<div
-								className="ql-options"
-								role="radiogroup"
-								aria-labelledby={labelId}
-							>
+							<div className="ql-options" role="radiogroup" aria-labelledby={labelId}>
 								{q.options.map((opt, idx) => (
 									<label
 										key={idx}
@@ -151,6 +169,7 @@ export default function QuizForm({
 											checked={answers[q.id] === idx}
 											onChange={() => setAnswer(q.id, idx)}
 										/>
+										<span className="ql-option-mark" aria-hidden="true"></span>
 										<span>{opt}</span>
 									</label>
 								))}
@@ -163,7 +182,7 @@ export default function QuizForm({
 			{esPost && (
 				<div className="ql-extra">
 					<fieldset className="ql-field">
-						<legend>¿Qué tan satisfecho quedaste con el sprint? (1 a 5)</legend>
+						<legend>¿Qué tan satisfecho quedaste con la unidad? (1 a 5)</legend>
 						<div className="ql-scale">
 							{[1, 2, 3, 4, 5].map((n) => (
 								<button
@@ -185,7 +204,7 @@ export default function QuizForm({
 							{["Sí", "No"].map((v) => (
 								<label
 									key={v}
-									className={`ql-option ${recomienda === v ? "is-selected" : ""}`}
+									className={`ql-option ql-option-inline ${recomienda === v ? "is-selected" : ""}`}
 								>
 									<input
 										type="radio"
@@ -193,6 +212,7 @@ export default function QuizForm({
 										checked={recomienda === v}
 										onChange={() => setRecomienda(v)}
 									/>
+									<span className="ql-option-mark" aria-hidden="true"></span>
 									<span>{v}</span>
 								</label>
 							))}
@@ -220,7 +240,7 @@ export default function QuizForm({
 				{estado === "sending"
 					? "Enviando…"
 					: esPost
-						? "Enviar y finalizar el sprint"
+						? "Enviar y finalizar la unidad"
 						: "Enviar y continuar"}
 			</button>
 		</form>

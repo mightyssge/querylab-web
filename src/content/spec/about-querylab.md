@@ -8,12 +8,12 @@ updated: 2026-06-16
 
 ### Cómo está organizado
 
-El curso se divide en sprints. Cada sprint sigue la misma estructura de clase:
+El curso se divide en unidades. Cada unidad sigue la misma estructura de clase:
 
-1. **Encuesta de evaluación (pre)** — para medir el punto de partida.
-2. **Videos** — cápsulas cortas que explican el tema.
-3. **Lecturas** — los temas en formato blog, con SQL real y diagramas.
-4. **Formulario de evaluación (post)** — para medir lo aprendido y registrar a quienes terminan.
+1. **Evaluación inicial** — para medir el punto de partida.
+2. **Videos y lecturas** — cápsulas cortas y el tema en detalle, en la misma pantalla.
+3. **Práctica con sandbox** — escribes y ejecutas SQL real, con corrección automática.
+4. **Evaluación final** — para medir lo aprendido y registrar a quienes terminan.
 
 ### Filosofía
 
@@ -21,6 +21,6 @@ El curso se divide en sprints. Cada sprint sigue la misma estructura de clase:
 - **Práctica real** — usamos casos concretos sobre Oracle (por ejemplo, una cadena de cines).
 - **Medible** — comparamos las respuestas pre y post para ver cuánto mejora cada participante.
 
-### Sprint 1 disponible
+### Unidad 1 disponible
 
-El primer sprint cubre **DDL** (Lenguaje de Definición de Datos): `CREATE`, `ALTER` y `DROP`. Identifícate con tu correo institucional **@ulima.edu.pe** para que tu avance quede registrado.
+La primera unidad cubre **DDL** (Lenguaje de Definición de Datos): `CREATE`, `ALTER` y `DROP`. Identifícate con tu correo institucional **@ulima.edu.pe** para que tu avance quede registrado.

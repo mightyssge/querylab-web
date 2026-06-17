@@ -1,279 +1,148 @@
-/* Estilos de la experiencia de curso Query Lab (islas React). */
+/* Formularios de Query Lab (evaluación pre/post). */
 
-.ql-course {
+.ql-quiz {
 	display: flex;
 	flex-direction: column;
-	gap: 1.25rem;
+	gap: 1.5rem;
 	font-family: var(--font-sans);
 	color: var(--deep-text);
 }
 
-/* Barra de progreso */
-.ql-progress {
-	position: sticky;
-	top: 0;
-	z-index: 5;
-	background: var(--card-bg);
-	border: 1px solid rgba(var(--ce-border) / 0.6);
-	padding: 0.85rem 1rem;
-}
-.ql-progress-head {
-	display: flex;
-	justify-content: space-between;
-	font-size: 0.8rem;
-	font-weight: 700;
-	letter-spacing: 0.03em;
-	text-transform: uppercase;
-	color: var(--deep-text);
-	margin-bottom: 0.5rem;
-}
-.ql-progress-bar {
-	height: 8px;
-	background: rgba(var(--ce-border) / 0.5);
-	overflow: hidden;
-}
-.ql-progress-fill {
-	height: 100%;
-	background: var(--primary);
-	transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* Banner de finalización */
-.ql-done-banner {
-	background: rgba(var(--ce-accent) / 0.1);
-	border: 1px solid var(--primary);
-	border-left: 4px solid var(--primary);
-	padding: 1rem 1.25rem;
-}
-.ql-done-banner strong {
-	font-size: 1.1rem;
-	color: var(--primary);
-}
-.ql-done-banner p {
-	margin: 0.35rem 0 0;
-	font-size: 0.9rem;
-}
-
-/* Stepper */
-.ql-steps {
-	list-style: none;
-	margin: 0;
-	padding: 0;
-	display: flex;
-	flex-direction: column;
-	gap: 0.85rem;
-}
-.ql-step {
-	border: 1px solid rgba(var(--ce-border) / 0.7);
-	background: var(--page-bg);
-}
-.ql-step.is-open {
-	border-color: var(--primary);
-	box-shadow: 0 6px 24px -12px rgba(var(--ce-ink) / 0.4);
-}
-.ql-step.is-locked {
-	opacity: 0.6;
-}
-
-.ql-step-head {
-	width: 100%;
-	display: flex;
-	align-items: center;
-	gap: 0.9rem;
-	padding: 1rem 1.1rem;
-	background: transparent;
-	border: 0;
-	cursor: pointer;
-	text-align: left;
-	font-family: inherit;
-	color: inherit;
-}
-.ql-step-head:disabled {
-	cursor: not-allowed;
-}
-.ql-step-marker {
-	flex-shrink: 0;
-	width: 2rem;
-	height: 2rem;
-	display: grid;
-	place-items: center;
-	border: 1px solid rgba(var(--ce-border) / 0.9);
-	font-weight: 700;
-	font-size: 0.95rem;
-}
-.ql-step.is-done .ql-step-marker {
-	background: var(--primary);
-	border-color: var(--primary);
-	color: #fff;
-}
-.ql-step.is-open .ql-step-marker {
-	border-color: var(--primary);
-	color: var(--primary);
-}
-.ql-step-titles {
-	display: flex;
-	flex-direction: column;
-	gap: 0.15rem;
-	flex: 1;
-}
-.ql-step-label {
-	font-weight: 700;
-	font-size: 1rem;
-}
-.ql-step-desc {
-	font-size: 0.82rem;
-	color: rgba(var(--ce-ink) / 0.65);
-	line-height: 1.4;
-}
-.ql-step-status {
-	font-size: 0.72rem;
-	font-weight: 700;
-	text-transform: uppercase;
-	letter-spacing: 0.05em;
-	color: var(--primary);
-}
-
-.ql-step-body {
-	padding: 0.5rem 1.1rem 1.4rem;
-	display: flex;
-	flex-direction: column;
-	gap: 1rem;
-}
-.ql-step-ok {
-	font-weight: 600;
-	color: var(--primary);
-	margin: 0;
-}
-
-/* Video */
-.ql-video {
-	position: relative;
-	width: 100%;
-	aspect-ratio: 16 / 9;
-	background: #000;
-}
-.ql-video iframe {
-	position: absolute;
-	inset: 0;
-	width: 100%;
-	height: 100%;
-	border: 0;
-}
-.ql-lesson-link {
-	display: inline-block;
-	font-weight: 600;
-	color: var(--primary);
-	text-decoration: none;
-	border-bottom: 1px solid rgba(var(--ce-accent) / 0.4);
-	width: fit-content;
-}
-.ql-lesson-link:hover {
-	border-bottom-color: var(--primary);
-}
-
-/* Formulario */
-.ql-quiz {
-	display: flex;
-	flex-direction: column;
-	gap: 1.25rem;
-}
+/* Campos de identidad */
 .ql-fields {
 	display: grid;
-	gap: 0.85rem;
+	gap: 1rem;
 	grid-template-columns: 1fr;
 }
 @media (min-width: 640px) {
-	.ql-fields {
-		grid-template-columns: 1fr 1fr;
-	}
+	.ql-fields { grid-template-columns: 1fr 1fr; }
 }
 .ql-field {
 	display: flex;
 	flex-direction: column;
-	gap: 0.35rem;
-	font-size: 0.85rem;
-	font-weight: 600;
+	gap: 0.4rem;
+	font-size: 0.9rem;
+	font-weight: 700;
+}
+.ql-field > span,
+.ql-field > legend {
+	color: var(--deep-text);
 }
 .ql-field input,
 .ql-field textarea {
 	font-family: inherit;
-	font-size: 0.9rem;
+	font-size: 0.95rem;
 	font-weight: 400;
-	padding: 0.6rem 0.7rem;
-	border: 1px solid rgba(var(--ce-border) / 0.9);
-	background: var(--page-bg);
+	padding: 0.75rem 0.85rem;
+	border: 1.5px solid rgba(var(--ce-ink) / 0.25);
+	background: #fff;
 	color: var(--deep-text);
+	border-radius: 4px;
 }
+.ql-field input::placeholder,
+.ql-field textarea::placeholder { color: rgba(var(--ce-ink) / 0.4); }
 .ql-field input:focus,
 .ql-field textarea:focus {
-	outline: 2px solid var(--primary);
-	outline-offset: -1px;
+	outline: none;
+	border-color: var(--primary);
+	box-shadow: 0 0 0 3px rgba(var(--ce-accent) / 0.18);
+}
+.ql-field input[aria-invalid="true"] {
+	border-color: #b00020;
+	box-shadow: 0 0 0 3px rgba(176, 0, 32, 0.12);
 }
 
+/* Preguntas */
 .ql-questions {
 	list-style: none;
 	margin: 0;
 	padding: 0;
 	display: flex;
 	flex-direction: column;
-	gap: 1.4rem;
+	gap: 1.75rem;
 }
 .ql-q-prompt {
-	margin: 0 0 0.6rem;
-	font-weight: 600;
+	margin: 0 0 0.75rem;
+	font-weight: 700;
+	font-size: 1rem;
 	line-height: 1.5;
+	color: var(--deep-text);
 }
-.ql-q-num {
-	color: var(--primary);
-	font-weight: 800;
-	margin-right: 0.25rem;
-}
+.ql-q-num { color: var(--primary); font-weight: 800; margin-right: 0.25rem; }
 .ql-q-code {
 	font-family: var(--font-mono);
-	font-size: 0.82rem;
-	background: rgba(var(--ce-ink) / 0.06);
-	border-left: 3px solid var(--primary);
-	padding: 0.7rem 0.85rem;
-	margin: 0 0 0.7rem;
+	font-size: 0.84rem;
+	line-height: 1.6;
+	color: #f4efe2;
+	background: #1a1814;
+	border-radius: 4px;
+	padding: 0.8rem 0.95rem;
+	margin: 0 0 0.85rem;
 	overflow-x: auto;
 	white-space: pre;
 }
+
+/* Opciones tipo tarjeta con marca de radio personalizada */
 .ql-options,
 .ql-yesno {
 	display: flex;
 	flex-direction: column;
-	gap: 0.5rem;
+	gap: 0.55rem;
 }
+.ql-yesno { flex-direction: row; flex-wrap: wrap; }
 .ql-option {
 	display: flex;
 	align-items: flex-start;
-	gap: 0.6rem;
-	padding: 0.6rem 0.75rem;
-	border: 1px solid rgba(var(--ce-border) / 0.8);
+	gap: 0.7rem;
+	padding: 0.8rem 0.9rem;
+	border: 1.5px solid rgba(var(--ce-ink) / 0.18);
+	border-radius: 6px;
+	background: #fff;
 	cursor: pointer;
 	font-weight: 400;
-	font-size: 0.9rem;
-	line-height: 1.4;
-	transition: border-color 0.15s, background 0.15s;
+	font-size: 0.95rem;
+	line-height: 1.45;
+	transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
 }
-.ql-option:hover {
-	border-color: var(--primary);
-}
+.ql-option:hover { border-color: var(--primary); }
 .ql-option.is-selected {
 	border-color: var(--primary);
-	background: rgba(var(--ce-accent) / 0.08);
+	background: rgba(var(--ce-accent) / 0.07);
+	box-shadow: 0 0 0 1px var(--primary);
 }
-.ql-option input {
-	margin-top: 0.2rem;
-	accent-color: var(--primary);
+.ql-option input { position: absolute; opacity: 0; width: 0; height: 0; }
+.ql-option-mark {
+	flex-shrink: 0;
+	width: 1.15rem;
+	height: 1.15rem;
+	margin-top: 0.1rem;
+	border: 2px solid rgba(var(--ce-ink) / 0.35);
+	border-radius: 50%;
+	display: grid;
+	place-items: center;
+	transition: border-color 0.15s;
 }
+.ql-option-mark::after {
+	content: "";
+	width: 0.55rem;
+	height: 0.55rem;
+	border-radius: 50%;
+	background: var(--primary);
+	transform: scale(0);
+	transition: transform 0.15s;
+}
+.ql-option.is-selected .ql-option-mark { border-color: var(--primary); }
+.ql-option.is-selected .ql-option-mark::after { transform: scale(1); }
+.ql-option:focus-within { box-shadow: 0 0 0 3px rgba(var(--ce-accent) / 0.18); }
+.ql-option-inline { flex: 1; min-width: 7rem; }
 
+/* Extras del post */
 .ql-extra {
 	display: flex;
 	flex-direction: column;
-	gap: 1.1rem;
-	border-top: 1px dashed rgba(var(--ce-border) / 0.8);
-	padding-top: 1.1rem;
+	gap: 1.4rem;
+	border-top: 1px dashed rgba(var(--ce-border) / 0.9);
+	padding-top: 1.4rem;
 }
 .ql-quiz fieldset.ql-field {
 	display: block;
@@ -283,25 +152,26 @@
 	min-width: 0;
 }
 .ql-quiz legend {
-	font-size: 0.85rem;
-	font-weight: 600;
-	padding: 0;
-	margin-bottom: 0.5rem;
-}
-.ql-scale {
-	display: flex;
-	gap: 0.5rem;
-}
-.ql-scale-btn {
-	width: 2.6rem;
-	height: 2.6rem;
-	border: 1px solid rgba(var(--ce-border) / 0.9);
-	background: var(--page-bg);
+	font-size: 0.9rem;
 	font-weight: 700;
+	padding: 0;
+	margin-bottom: 0.6rem;
+}
+.ql-scale { display: flex; gap: 0.5rem; }
+.ql-scale-btn {
+	width: 3rem;
+	height: 3rem;
+	border: 1.5px solid rgba(var(--ce-ink) / 0.22);
+	border-radius: 6px;
+	background: #fff;
+	font-weight: 800;
+	font-size: 1.05rem;
 	cursor: pointer;
 	font-family: inherit;
-	color: inherit;
+	color: var(--deep-text);
+	transition: all 0.15s;
 }
+.ql-scale-btn:hover { border-color: var(--primary); }
 .ql-scale-btn.is-selected {
 	background: var(--primary);
 	border-color: var(--primary);
@@ -311,8 +181,12 @@
 .ql-error {
 	color: #b00020;
 	font-weight: 600;
-	font-size: 0.88rem;
+	font-size: 0.9rem;
 	margin: 0;
+	padding: 0.6rem 0.85rem;
+	background: rgba(176, 0, 32, 0.08);
+	border-left: 3px solid #b00020;
+	border-radius: 0 4px 4px 0;
 }
 
 .ql-submit {
@@ -321,30 +195,37 @@
 	color: #fff;
 	font-weight: 700;
 	font-family: inherit;
-	font-size: 0.92rem;
-	padding: 0.7rem 1.4rem;
+	font-size: 0.95rem;
+	padding: 0.8rem 1.6rem;
 	border: 0;
+	border-radius: 6px;
 	cursor: pointer;
 	transition: opacity 0.15s;
 }
-.ql-submit:hover {
-	opacity: 0.9;
-}
-.ql-submit:disabled {
-	opacity: 0.6;
-	cursor: progress;
-}
+.ql-submit:hover { opacity: 0.9; }
+.ql-submit:disabled { opacity: 0.6; cursor: progress; }
 
-.ql-reset {
-	align-self: flex-end;
-	background: transparent;
-	border: 0;
-	color: rgba(var(--ce-ink) / 0.55);
-	font-size: 0.8rem;
-	font-family: inherit;
-	text-decoration: underline;
-	cursor: pointer;
+/* Panel de éxito */
+.ql-done {
+	display: flex;
+	align-items: flex-start;
+	gap: 1rem;
+	padding: 1.25rem 1.4rem;
+	background: rgba(var(--ce-accent) / 0.1);
+	border: 1px solid var(--primary);
+	border-radius: 8px;
 }
-.ql-reset:hover {
-	color: var(--primary);
+.ql-done-ico {
+	flex-shrink: 0;
+	width: 2.25rem;
+	height: 2.25rem;
+	display: grid;
+	place-items: center;
+	background: var(--primary);
+	color: #fff;
+	border-radius: 50%;
+	font-weight: 800;
+	font-size: 1.2rem;
 }
+.ql-done strong { font-size: 1.05rem; color: var(--deep-text); }
+.ql-done p { margin: 0.25rem 0 0; font-size: 0.9rem; color: var(--lt-muted, #6b6456); }
