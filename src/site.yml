@@ -1,0 +1,63 @@
+site:
+  title: "Query Lab"
+  subtitle: "Aprende SQL con criterio de negocio"
+  url: "https://querylab.vercel.app"
+  lang: "es"
+  author: "Equipo Query Lab"
+  email: "querylab@ulima.edu.pe"
+  favicon: "/images/favicon.webp"
+  banner: ""
+  og_image: "/og.webp"
+
+profile:
+  avatar: "/images/favicon.webp"
+  name: "Query Lab"
+  bio: "Plataforma educativa de SQL — Universidad de Lima"
+  links:
+    - name: "Sprint 1"
+      url: "/sprint-1/"
+    - name: "Temas"
+      url: "/archive/"
+
+nav:
+  - Inicio: "/"
+  - Sprint 1: "/sprint-1/"
+  - Temas: "/archive/"
+  - Acerca: "/about/"
+
+features:
+  breadcrumb: true
+  comments: false
+  search: false
+  donate: false
+  rss_feed: true
+  sitemap: true
+  related_posts: true
+  series: false
+  license: true
+
+seo:
+  enable_json_ld: false
+  breadcrumb: true
+  keywords: "SQL, DDL, Oracle, curso, base de datos, Query Lab, Universidad de Lima"
+  same_as: []
+
+services:
+  posthog:
+    api_key: ""
+    api_host: "https://app.posthog.com"
+  webmention:
+    url: ""
+  blogsclub:
+    badge_url: ""
+  issue_tracker:
+    url: ""
+
+trusted_domains:
+  - "querylab.vercel.app"
+
+copyright:
+  text: "Query Lab — Universidad de Lima"
+  site_name: "Query Lab"
+  license: "MIT"
+  license_url: "https://opensource.org/licenses/MIT"

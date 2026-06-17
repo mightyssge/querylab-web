@@ -1,0 +1,350 @@
+/* Estilos de la experiencia de curso Query Lab (islas React). */
+
+.ql-course {
+	display: flex;
+	flex-direction: column;
+	gap: 1.25rem;
+	font-family: var(--font-sans);
+	color: var(--deep-text);
+}
+
+/* Barra de progreso */
+.ql-progress {
+	position: sticky;
+	top: 0;
+	z-index: 5;
+	background: var(--card-bg);
+	border: 1px solid rgba(var(--ce-border) / 0.6);
+	padding: 0.85rem 1rem;
+}
+.ql-progress-head {
+	display: flex;
+	justify-content: space-between;
+	font-size: 0.8rem;
+	font-weight: 700;
+	letter-spacing: 0.03em;
+	text-transform: uppercase;
+	color: var(--deep-text);
+	margin-bottom: 0.5rem;
+}
+.ql-progress-bar {
+	height: 8px;
+	background: rgba(var(--ce-border) / 0.5);
+	overflow: hidden;
+}
+.ql-progress-fill {
+	height: 100%;
+	background: var(--primary);
+	transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Banner de finalización */
+.ql-done-banner {
+	background: rgba(var(--ce-accent) / 0.1);
+	border: 1px solid var(--primary);
+	border-left: 4px solid var(--primary);
+	padding: 1rem 1.25rem;
+}
+.ql-done-banner strong {
+	font-size: 1.1rem;
+	color: var(--primary);
+}
+.ql-done-banner p {
+	margin: 0.35rem 0 0;
+	font-size: 0.9rem;
+}
+
+/* Stepper */
+.ql-steps {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 0.85rem;
+}
+.ql-step {
+	border: 1px solid rgba(var(--ce-border) / 0.7);
+	background: var(--page-bg);
+}
+.ql-step.is-open {
+	border-color: var(--primary);
+	box-shadow: 0 6px 24px -12px rgba(var(--ce-ink) / 0.4);
+}
+.ql-step.is-locked {
+	opacity: 0.6;
+}
+
+.ql-step-head {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	gap: 0.9rem;
+	padding: 1rem 1.1rem;
+	background: transparent;
+	border: 0;
+	cursor: pointer;
+	text-align: left;
+	font-family: inherit;
+	color: inherit;
+}
+.ql-step-head:disabled {
+	cursor: not-allowed;
+}
+.ql-step-marker {
+	flex-shrink: 0;
+	width: 2rem;
+	height: 2rem;
+	display: grid;
+	place-items: center;
+	border: 1px solid rgba(var(--ce-border) / 0.9);
+	font-weight: 700;
+	font-size: 0.95rem;
+}
+.ql-step.is-done .ql-step-marker {
+	background: var(--primary);
+	border-color: var(--primary);
+	color: #fff;
+}
+.ql-step.is-open .ql-step-marker {
+	border-color: var(--primary);
+	color: var(--primary);
+}
+.ql-step-titles {
+	display: flex;
+	flex-direction: column;
+	gap: 0.15rem;
+	flex: 1;
+}
+.ql-step-label {
+	font-weight: 700;
+	font-size: 1rem;
+}
+.ql-step-desc {
+	font-size: 0.82rem;
+	color: rgba(var(--ce-ink) / 0.65);
+	line-height: 1.4;
+}
+.ql-step-status {
+	font-size: 0.72rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	color: var(--primary);
+}
+
+.ql-step-body {
+	padding: 0.5rem 1.1rem 1.4rem;
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+.ql-step-ok {
+	font-weight: 600;
+	color: var(--primary);
+	margin: 0;
+}
+
+/* Video */
+.ql-video {
+	position: relative;
+	width: 100%;
+	aspect-ratio: 16 / 9;
+	background: #000;
+}
+.ql-video iframe {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	border: 0;
+}
+.ql-lesson-link {
+	display: inline-block;
+	font-weight: 600;
+	color: var(--primary);
+	text-decoration: none;
+	border-bottom: 1px solid rgba(var(--ce-accent) / 0.4);
+	width: fit-content;
+}
+.ql-lesson-link:hover {
+	border-bottom-color: var(--primary);
+}
+
+/* Formulario */
+.ql-quiz {
+	display: flex;
+	flex-direction: column;
+	gap: 1.25rem;
+}
+.ql-fields {
+	display: grid;
+	gap: 0.85rem;
+	grid-template-columns: 1fr;
+}
+@media (min-width: 640px) {
+	.ql-fields {
+		grid-template-columns: 1fr 1fr;
+	}
+}
+.ql-field {
+	display: flex;
+	flex-direction: column;
+	gap: 0.35rem;
+	font-size: 0.85rem;
+	font-weight: 600;
+}
+.ql-field input,
+.ql-field textarea {
+	font-family: inherit;
+	font-size: 0.9rem;
+	font-weight: 400;
+	padding: 0.6rem 0.7rem;
+	border: 1px solid rgba(var(--ce-border) / 0.9);
+	background: var(--page-bg);
+	color: var(--deep-text);
+}
+.ql-field input:focus,
+.ql-field textarea:focus {
+	outline: 2px solid var(--primary);
+	outline-offset: -1px;
+}
+
+.ql-questions {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 1.4rem;
+}
+.ql-q-prompt {
+	margin: 0 0 0.6rem;
+	font-weight: 600;
+	line-height: 1.5;
+}
+.ql-q-num {
+	color: var(--primary);
+	font-weight: 800;
+	margin-right: 0.25rem;
+}
+.ql-q-code {
+	font-family: var(--font-mono);
+	font-size: 0.82rem;
+	background: rgba(var(--ce-ink) / 0.06);
+	border-left: 3px solid var(--primary);
+	padding: 0.7rem 0.85rem;
+	margin: 0 0 0.7rem;
+	overflow-x: auto;
+	white-space: pre;
+}
+.ql-options,
+.ql-yesno {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+.ql-option {
+	display: flex;
+	align-items: flex-start;
+	gap: 0.6rem;
+	padding: 0.6rem 0.75rem;
+	border: 1px solid rgba(var(--ce-border) / 0.8);
+	cursor: pointer;
+	font-weight: 400;
+	font-size: 0.9rem;
+	line-height: 1.4;
+	transition: border-color 0.15s, background 0.15s;
+}
+.ql-option:hover {
+	border-color: var(--primary);
+}
+.ql-option.is-selected {
+	border-color: var(--primary);
+	background: rgba(var(--ce-accent) / 0.08);
+}
+.ql-option input {
+	margin-top: 0.2rem;
+	accent-color: var(--primary);
+}
+
+.ql-extra {
+	display: flex;
+	flex-direction: column;
+	gap: 1.1rem;
+	border-top: 1px dashed rgba(var(--ce-border) / 0.8);
+	padding-top: 1.1rem;
+}
+.ql-quiz fieldset.ql-field {
+	display: block;
+	border: 0;
+	margin: 0;
+	padding: 0;
+	min-width: 0;
+}
+.ql-quiz legend {
+	font-size: 0.85rem;
+	font-weight: 600;
+	padding: 0;
+	margin-bottom: 0.5rem;
+}
+.ql-scale {
+	display: flex;
+	gap: 0.5rem;
+}
+.ql-scale-btn {
+	width: 2.6rem;
+	height: 2.6rem;
+	border: 1px solid rgba(var(--ce-border) / 0.9);
+	background: var(--page-bg);
+	font-weight: 700;
+	cursor: pointer;
+	font-family: inherit;
+	color: inherit;
+}
+.ql-scale-btn.is-selected {
+	background: var(--primary);
+	border-color: var(--primary);
+	color: #fff;
+}
+
+.ql-error {
+	color: #b00020;
+	font-weight: 600;
+	font-size: 0.88rem;
+	margin: 0;
+}
+
+.ql-submit {
+	align-self: flex-start;
+	background: var(--primary);
+	color: #fff;
+	font-weight: 700;
+	font-family: inherit;
+	font-size: 0.92rem;
+	padding: 0.7rem 1.4rem;
+	border: 0;
+	cursor: pointer;
+	transition: opacity 0.15s;
+}
+.ql-submit:hover {
+	opacity: 0.9;
+}
+.ql-submit:disabled {
+	opacity: 0.6;
+	cursor: progress;
+}
+
+.ql-reset {
+	align-self: flex-end;
+	background: transparent;
+	border: 0;
+	color: rgba(var(--ce-ink) / 0.55);
+	font-size: 0.8rem;
+	font-family: inherit;
+	text-decoration: underline;
+	cursor: pointer;
+}
+.ql-reset:hover {
+	color: var(--primary);
+}

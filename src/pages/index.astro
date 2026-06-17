@@ -1,0 +1,116 @@
+---
+import { siteConfig } from "../config";
+import Layout from "../layouts/Layout.astro";
+
+const metaDescription =
+	"Query Lab: plataforma educativa de la Universidad de Lima para aprender SQL paso a paso, al estilo Coursera. Sprint 1: DDL.";
+
+const pasos = [
+	{ n: "1", t: "Encuesta pre", d: "Medimos tu punto de partida." },
+	{ n: "2", t: "Videos", d: "Cápsulas cortas y claras." },
+	{ n: "3", t: "Lecturas", d: "Los temas en formato blog, con SQL real." },
+	{ n: "4", t: "Formulario post", d: "Cierras con tu correo @ulima.edu.pe." },
+];
+
+const sprints = [
+	{
+		n: "Sprint 1",
+		t: "DDL — Definición de Datos",
+		d: "CREATE, ALTER y DROP: cómo se moldea la estructura de una base de datos con criterio de negocio.",
+		href: "/sprint-1/",
+		estado: "Disponible",
+		activo: true,
+	},
+	{
+		n: "Sprint 2",
+		t: "DML — Manipulación de Datos",
+		d: "INSERT, UPDATE y DELETE: cómo se carga y mantiene la información del día a día.",
+		href: "",
+		estado: "Próximamente",
+		activo: false,
+	},
+	{
+		n: "Sprint 3",
+		t: "DQL & DCL — Consulta y Control",
+		d: "SELECT para responder preguntas de negocio y GRANT/REVOKE para gobernar el acceso.",
+		href: "",
+		estado: "Próximamente",
+		activo: false,
+	},
+];
+---
+
+<Layout title={siteConfig.title} description={metaDescription}>
+	<section class="w-full flex flex-col items-center px-4 pt-24 pb-16">
+		<div class="w-full max-w-[900px] flex flex-col gap-6 text-center items-center">
+			<p class="text-xs font-bold uppercase tracking-[0.2em] text-primary">
+				Universidad de Lima · Curso de SQL
+			</p>
+			<h1 class="text-4xl md:text-6xl font-bold text-lt-ink leading-[1.05]">
+				Query Lab
+			</h1>
+			<p class="text-lg md:text-xl text-lt-muted max-w-[58ch] leading-relaxed">
+				Aprende SQL paso a paso, al estilo Coursera: cada sprint combina una evaluación,
+				videos cortos y lecturas prácticas. <strong class="text-lt-ink">Aprende con criterio de negocio</strong>,
+				no solo sintaxis.
+			</p>
+			<a
+				href="/sprint-1/"
+				class="mt-2 inline-block bg-primary text-white font-bold px-7 py-3 hover:opacity-90 transition-opacity"
+			>
+				Empezar el Sprint 1 →
+			</a>
+		</div>
+	</section>
+
+	<section class="w-full flex flex-col items-center px-4 pb-16">
+		<div class="w-full max-w-[900px]">
+			<div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+				{pasos.map((p) => (
+					<div class="bg-lt-surface border border-lt-border p-4 flex flex-col gap-1">
+						<span class="text-2xl font-bold text-primary">{p.n}</span>
+						<span class="font-bold text-lt-ink text-sm">{p.t}</span>
+						<span class="text-xs text-lt-muted leading-snug">{p.d}</span>
+					</div>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<section class="w-full flex flex-col items-center px-4 pb-28">
+		<div class="w-full max-w-[900px] flex flex-col gap-5">
+			<h2 class="text-2xl font-bold text-lt-ink">Ruta del curso</h2>
+			<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+				{sprints.map((s) => (
+					<div
+						class:list={[
+							"border p-5 flex flex-col gap-3 min-h-[220px]",
+							s.activo ? "border-primary bg-lt-bg" : "border-lt-border bg-lt-surface/50",
+						]}
+					>
+						<div class="flex items-center justify-between">
+							<span class="text-xs font-bold uppercase tracking-wider text-primary">{s.n}</span>
+							<span
+								class:list={[
+									"text-[0.65rem] font-bold uppercase tracking-wider px-2 py-0.5",
+									s.activo ? "bg-primary text-white" : "bg-lt-border/40 text-lt-muted",
+								]}
+							>
+								{s.estado}
+							</span>
+						</div>
+						<h3 class="text-lg font-bold text-lt-ink leading-snug">{s.t}</h3>
+						<p class="text-sm text-lt-muted leading-relaxed flex-1">{s.d}</p>
+						{s.activo ? (
+							<a href={s.href} class="font-bold text-primary hover:underline w-fit">
+								Entrar →
+							</a>
+						) : (
+							<span class="font-semibold text-lt-ghost w-fit">En preparación</span>
+						)}
+					</div>
+				))}
+			</div>
+		</div>
+	</section>
+</Layout>

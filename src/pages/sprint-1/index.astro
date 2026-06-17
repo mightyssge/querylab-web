@@ -1,0 +1,38 @@
+---
+import Sprint1Course from "@components/querylab/Sprint1Course";
+import { siteConfig } from "../../config";
+import Layout from "../../layouts/Layout.astro";
+
+const pageTitle = `Sprint 1 · DDL - ${siteConfig.title}`;
+const metaDescription =
+	"Sprint 1 de Query Lab: aprende DDL (CREATE, ALTER, DROP) con videos, lecturas y una evaluación pre/post. Usa tu correo @ulima.edu.pe.";
+---
+
+<Layout title={pageTitle} description={metaDescription}>
+	<div class="w-full flex flex-col items-center px-4 pt-20 pb-20">
+		<div class="w-full max-w-[880px] flex flex-col gap-8">
+
+			<header class="flex flex-col gap-3">
+				<a href="/" class="text-sm font-semibold text-lt-muted hover:text-primary w-fit">← Volver al inicio</a>
+				<p class="text-xs font-bold uppercase tracking-widest text-primary">Sprint 1</p>
+				<h1 class="text-3xl md:text-4xl font-bold text-lt-ink leading-tight">
+					DDL · Lenguaje de Definición de Datos
+				</h1>
+				<p class="text-base text-lt-muted max-w-[60ch] leading-relaxed">
+					Aprende a crear, modificar y eliminar la estructura de una base de datos
+					con criterio de negocio. Sigue los 4 pasos en orden: tu progreso se guarda
+					en este navegador.
+				</p>
+				<div class="flex flex-wrap gap-2 text-xs font-semibold text-lt-ink mt-1">
+					<span class="px-2.5 py-1 bg-lt-surface border border-lt-border">4 pasos</span>
+					<span class="px-2.5 py-1 bg-lt-surface border border-lt-border">2 videos</span>
+					<span class="px-2.5 py-1 bg-lt-surface border border-lt-border">2 lecturas</span>
+					<span class="px-2.5 py-1 bg-lt-surface border border-lt-border">~25 min</span>
+				</div>
+			</header>
+
+			<Sprint1Course client:load />
+
+		</div>
+	</div>
+</Layout>
