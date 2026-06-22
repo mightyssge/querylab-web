@@ -13,7 +13,6 @@
 English | [简体中文](README-zhCN.md)
 
 A minimal Astro blog template. Clean, fast, fully configurable via YAML.
-
 ## Demo
 
 👉[Live Demo Here!](https://lonetrail.vercel.app/)
