@@ -99,8 +99,9 @@ export const UNIDAD_2: Unidad = {
 			subtitulo: "INSERT, UPDATE, DELETE y transacciones",
 			tipo: "leccion",
 			icon: "play-circle",
+			yt: "Gg1YyVudeas",
 			post: "dml/tema-1-fundamentos-dml",
-			duracion: "8 min",
+			duracion: "2:30",
 		},
 		{
 			slug: "dml-en-la-practica",
@@ -108,8 +109,9 @@ export const UNIDAD_2: Unidad = {
 			subtitulo: "Operar la taquilla de la cadena de cines",
 			tipo: "leccion",
 			icon: "play-circle",
+			yt: "yc3EW_gRp4U",
 			post: "dml/tema-2-dml-en-la-practica",
-			duracion: "8 min",
+			duracion: "2:03",
 		},
 		{
 			slug: "practica-dml",
