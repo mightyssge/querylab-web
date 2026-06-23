@@ -90,7 +90,7 @@ export const SideDrawer = ({
 				<button
 					type="button"
 					onClick={() => setIsSidebarCollapsed(true)}
-					className="hidden lg:flex absolute top-3 right-3 z-10 items-center justify-center w-8 h-8 text-lt-ghost hover:text-white hover:bg-white/10 transition-colors"
+					className="sidebar-collapse-btn absolute top-3 right-3 z-10 items-center justify-center w-9 h-9 text-white/75 border border-white/20 hover:text-white hover:bg-white/10 transition-colors"
 					title="Ocultar panel"
 					aria-label="Ocultar panel lateral"
 				>

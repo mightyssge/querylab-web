@@ -329,6 +329,7 @@ jsonLd["@graph"].push({
         overflow: hidden;
     }
     .sidebar-reopen { display: none; }
+    .sidebar-collapse-btn { display: none; }
     #push-wrapper {
         display: flex;
         width: calc(100vw + 300px);
@@ -391,5 +392,8 @@ jsonLd["@graph"].push({
     .sidebar-collapsed .sidebar-reopen {
         display: flex !important;
     }
+    /* Botón de colapsar: visible en escritorio (no depende de Tailwind lg:) */
+    .sidebar-collapse-btn { display: flex !important; }
+    .sidebar-collapsed .sidebar-collapse-btn { display: none !important; }
 }
 </style>
