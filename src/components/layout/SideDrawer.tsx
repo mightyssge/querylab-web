@@ -125,24 +125,6 @@ export const SideDrawer = ({
 							<span className="block font-mono text-[9px] text-lt-ghost tracking-[0.2em] uppercase">
 								Curso de SQL
 							</span>
-							<a
-								href="/subscribe/"
-								className="mt-2 flex items-center gap-1.5 px-2 py-1 border border-white/10 text-lt-ghost hover:text-lt-accent hover:border-lt-accent/50 transition-all text-[9px] font-mono uppercase tracking-widest"
-								title="Seguir por RSS"
-							>
-								<svg
-									className="w-3 h-3"
-									viewBox="0 0 24 24"
-									fill="none"
-									stroke="currentColor"
-									strokeWidth="2"
-								>
-									<path d="M4 11a9 9 0 0 1 9 9" />
-									<path d="M4 4a16 16 0 0 1 16 16" />
-									<circle cx="5" cy="19" r="1" />
-								</svg>
-								{i18n(I18nKey.follow)}
-							</a>
 						</div>
 					</div>
 					<div className="px-4 mt-4">

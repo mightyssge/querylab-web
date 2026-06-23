@@ -48,6 +48,13 @@ const unidades = [
 		activo: false,
 	},
 ];
+
+const temas = [
+	{ n: "01", u: "Unidad 1 · DDL", t: "Fundamentos de DDL", href: "/unidad-1/ddl-en-concepto/" },
+	{ n: "02", u: "Unidad 1 · DDL", t: "DDL en la práctica (cadena de cines)", href: "/unidad-1/ddl-en-la-practica/" },
+	{ n: "03", u: "Unidad 2 · DML", t: "Fundamentos de DML", href: "/unidad-2/dml-en-concepto/" },
+	{ n: "04", u: "Unidad 2 · DML", t: "DML en la práctica (cadena de cines)", href: "/unidad-2/dml-en-la-practica/" },
+];
 ---
 
 <Layout title={siteConfig.title} description={metaDescription}>
@@ -199,6 +206,27 @@ const unidades = [
 			</div>
 		</div>
 	</section>
+
+		<!-- TEMAS DEL CURSO -->
+		<section class="ql-section">
+			<div class="ql-wrap">
+				<h2 class="ql-h2">Temas del curso</h2>
+				<ol class="ql-temas">
+					{temas.map((t, i) => (
+						<li class="reveal" style={`--d:${i * 60}ms`}>
+							<a href={t.href} class="ql-tema-link">
+								<span class="ql-tema-n">{t.n}</span>
+								<span class="ql-tema-body">
+									<span class="ql-tema-u">{t.u}</span>
+									<span class="ql-tema-t">{t.t}</span>
+								</span>
+								<Icon name="material-symbols:arrow-forward-rounded" />
+							</a>
+						</li>
+					))}
+				</ol>
+			</div>
+		</section>
 </Layout>
 
 <style>
@@ -313,4 +341,21 @@ const unidades = [
 	.ql-raffle-text { margin: 0; font-size: 1rem; line-height: 1.45; color: var(--deep-text); }
 	.ql-raffle-text strong { color: #b07d29; font-weight: 800; }
 	@media (max-width: 520px) { .ql-raffle { align-items: flex-start; } }
+
+	/* Temas del curso */
+	.ql-temas { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.6rem; }
+	.ql-tema-link {
+		display: flex; align-items: center; gap: 1rem;
+		padding: 1rem 1.2rem;
+		background: var(--card-bg);
+		border: 1px solid rgba(var(--ce-border) / 0.85);
+		text-decoration: none; color: var(--deep-text);
+		transition: transform 0.15s, border-color 0.15s, box-shadow 0.15s;
+	}
+	.ql-tema-link:hover { transform: translateX(4px); border-color: var(--primary); box-shadow: 0 10px 24px -16px rgba(26, 24, 20, 0.5); }
+	.ql-tema-n { font-family: var(--font-mono); font-size: 1.1rem; font-weight: 800; color: var(--primary); flex-shrink: 0; }
+	.ql-tema-body { display: flex; flex-direction: column; gap: 0.1rem; flex: 1; min-width: 0; }
+	.ql-tema-u { font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; color: var(--lt-muted, #6b6456); }
+	.ql-tema-t { font-size: 1rem; font-weight: 700; line-height: 1.3; }
+	.ql-tema-link :global(svg) { width: 1.1em; height: 1.1em; color: var(--primary); flex-shrink: 0; }
 </style>
