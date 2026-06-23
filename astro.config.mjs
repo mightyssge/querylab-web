@@ -115,7 +115,7 @@ export default defineConfig({
         },
         }), 
         compress({
-        CSS: isCI,
+        CSS: false,
         HTML: isCI,
         Image: false,
         JavaScript: isCI,
