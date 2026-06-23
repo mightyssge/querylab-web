@@ -31,7 +31,7 @@ const title = `${leccion.titulo} · Unidad ${unidad.numero}`;
 ---
 
 <CourseLayout unidad={unidad} activeSlug={slug} title={title} description={leccion.subtitulo}>
-	<article class="lec">
+	<article class="lec" data-slug={slug} data-unidad={unidad.numero}>
 		<header class="lec-head">
 			<span class="lec-step">Lección {index + 1} de {total} · Unidad {unidad.numero}</span>
 			<h1 class="lec-title">{leccion.titulo}</h1>
@@ -68,7 +68,9 @@ const title = `${leccion.titulo} · Unidad ${unidad.numero}`;
 		{leccion.tipo === "form-post" && (
 			<QuizForm client:load tipo="post" questions={POST_QUESTIONS} lessonSlug={slug} unidad={1} />
 		)}
-		{leccion.tipo === "ejercicios" && <Sandbox client:only="react" />}
+		{leccion.tipo === "ejercicios" && (
+			<Sandbox client:only="react" set="ddl" practicaSlug={slug} unidad={1} />
+		)}
 
 		<nav class="lec-nav">
 			{prev ? (
@@ -161,20 +163,29 @@ const title = `${leccion.titulo} · Unidad ${unidad.numero}`;
 
 <script>
 	import { leerProgreso, marcarLeccion } from "../../scripts/progreso";
-	function initComplete() {
+	import { track } from "../../scripts/track";
+	function initLeccion() {
+		const art = document.querySelector(".lec") as HTMLElement | null;
+		if (!art || art.dataset.tracked) return;
+		art.dataset.tracked = "1";
+		const slug = art.dataset.slug || "";
+		const unidad = Number(art.dataset.unidad || "0");
+		track("ver_leccion", { slug }, unidad);
+
 		const btn = document.querySelector(".lec-complete") as HTMLButtonElement | null;
-		if (!btn || btn.dataset.init) return;
-		btn.dataset.init = "1";
-		const slug = btn.dataset.slug || "";
-		const setDone = () => {
-			btn.classList.add("is-done");
-			btn.textContent = "✓ Completada";
-		};
-		if (leerProgreso().completed.includes(slug)) setDone();
-		btn.addEventListener("click", () => {
-			marcarLeccion(slug);
-			setDone();
-		});
+		if (btn && !btn.dataset.init) {
+			btn.dataset.init = "1";
+			const setDone = () => {
+				btn.classList.add("is-done");
+				btn.textContent = "✓ Completada";
+			};
+			if (leerProgreso().completed.includes(slug)) setDone();
+			btn.addEventListener("click", () => {
+				marcarLeccion(slug);
+				track("completo_leccion", { slug }, unidad);
+				setDone();
+			});
+		}
 	}
-	document.addEventListener("astro:page-load", initComplete);
+	document.addEventListener("astro:page-load", initLeccion);
 </script>

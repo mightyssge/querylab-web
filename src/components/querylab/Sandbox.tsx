@@ -8,6 +8,7 @@ import {
 	marcarEjercicio,
 	marcarLeccion,
 } from "../../scripts/progreso";
+import { track } from "../../scripts/track";
 
 const SETS = {
 	ddl: EJERCICIOS,
@@ -19,6 +20,8 @@ export interface SandboxProps {
 	set?: keyof typeof SETS;
 	/** Slug de la lección de práctica a marcar como completada al terminar. */
 	practicaSlug?: string;
+	/** Número de unidad, para etiquetar los eventos de tracking. */
+	unidad?: number;
 }
 
 // Formatea **negrita** y `código` del enunciado (texto de confianza, escapado).
@@ -38,7 +41,7 @@ function celda(v: unknown): string {
 	return String(v);
 }
 
-export default function Sandbox({ set = "ddl", practicaSlug = "practica" }: SandboxProps = {}) {
+export default function Sandbox({ set = "ddl", practicaSlug = "practica", unidad = 1 }: SandboxProps = {}) {
 	const EJERCICIOS = SETS[set] ?? SETS.ddl;
 	const [idx, setIdx] = useState(0);
 	const [code, setCode] = useState(EJERCICIOS[0].starter);
@@ -47,6 +50,7 @@ export default function Sandbox({ set = "ddl", practicaSlug = "practica" }: Sand
 	const [verSolucion, setVerSolucion] = useState(false);
 	const [aprobados, setAprobados] = useState<Record<string, boolean>>({});
 	const primerRun = useRef(true);
+	const intentos = useRef<Record<string, number>>({});
 	const [primeraVez, setPrimeraVez] = useState(true);
 
 	const ex = EJERCICIOS[idx];
@@ -76,6 +80,14 @@ export default function Sandbox({ set = "ddl", practicaSlug = "practica" }: Sand
 		setPrimeraVez(false);
 		setResult(r);
 		setCorriendo(false);
+
+		const intento = (intentos.current[ex.id] || 0) + 1;
+		intentos.current[ex.id] = intento;
+		track(
+			"intento_ejercicio",
+			{ id: ex.id, intento, aprobado: r.aprobado, corrio: r.corrio },
+			unidad,
+		);
 
 		if (r.aprobado && !aprobados[ex.id]) {
 			// Se guarda localmente; las métricas se consolidan en la evaluación final.

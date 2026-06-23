@@ -13,6 +13,7 @@ import {
 	submitFinal,
 	validateEmail,
 } from "./lib/submit";
+import { clientId, track } from "../../scripts/track";
 import type { Question } from "./surveyData";
 
 interface Props {
@@ -89,6 +90,7 @@ export default function QuizForm({ tipo, questions, lessonSlug, unidad }: Props)
 		if (!esPost) {
 			guardarNombre(nombre.trim());
 			guardarPre(unidad, recolectar());
+			track("envio_pre", {}, unidad);
 			marcarLeccion(lessonSlug);
 			setEstado("done");
 			return;
@@ -115,6 +117,7 @@ export default function QuizForm({ tipo, questions, lessonSlug, unidad }: Props)
 			unidad,
 			nombre: nombre.trim(),
 			correo: correoNorm,
+			client_id: clientId(),
 			pre,
 			post,
 			ejercicios,
@@ -127,6 +130,7 @@ export default function QuizForm({ tipo, questions, lessonSlug, unidad }: Props)
 		if (result.ok) {
 			guardarCorreo(correoNorm);
 			guardarNombre(nombre.trim());
+			track("envio_post", { satisfaccion, recomienda }, unidad);
 			marcarLeccion(lessonSlug);
 			setEstado("done");
 		} else {

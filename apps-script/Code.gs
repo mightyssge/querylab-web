@@ -95,6 +95,22 @@ function escribirTest(tipo, unidad, nombre, correo, cuestionario, extras) {
 	return puntaje;
 }
 
+/** Registra un evento de aprendizaje (journey) en la pestaña Eventos. */
+function guardarEvento(data) {
+	var sheet = hojaCon('Eventos', [
+		'timestamp', 'client_id', 'correo', 'unidad', 'evento', 'detalle',
+	]);
+	var detalle = data.detalle;
+	sheet.appendRow([
+		new Date(),
+		data.client_id || '',
+		correoNorm(data.correo),
+		data.unidad === 0 ? 0 : (data.unidad || ''),
+		data.evento || '',
+		detalle && typeof detalle === 'object' ? JSON.stringify(detalle) : (detalle || ''),
+	]);
+}
+
 /** Escribe una fila por ejercicio en la pestaña Ejercicios. */
 function escribirEjercicio(unidad, correo, ejercicioId, aprobado) {
 	var sheet = hojaCon('Ejercicios', [
@@ -129,6 +145,17 @@ function guardarFinal(data) {
 		escribirEjercicio(unidad, correo, id, ejercicios[id]);
 	});
 
+	// Fila de enlace en Eventos: asocia el client_id anónimo con el correo final.
+	if (data.client_id) {
+		guardarEvento({
+			client_id: data.client_id,
+			correo: correo,
+			unidad: unidad,
+			evento: 'fin_unidad',
+			detalle: { puntaje_pre: puntajePre, puntaje_post: puntajePost },
+		});
+	}
+
 	return { pre: puntajePre, post: puntajePost };
 }
 
@@ -152,6 +179,13 @@ function guardarTest(data) {
 function doPost(e) {
 	try {
 		var data = JSON.parse(e.postData.contents);
+
+		if (data.tipo === 'evento') {
+			guardarEvento(data);
+			return ContentService
+				.createTextOutput(JSON.stringify({ ok: true }))
+				.setMimeType(ContentService.MimeType.JSON);
+		}
 
 		if (data.tipo === 'final') {
 			var puntajes = guardarFinal(data);

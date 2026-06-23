@@ -27,6 +27,8 @@ export interface FinalPayload {
 	unidad: number;
 	nombre: string;
 	correo: string;
+	/** ID anónimo del navegador, para unir el correo con los eventos del recorrido. */
+	client_id: string;
 	/** Respuestas del diagnóstico inicial (capturadas localmente, sin correo). */
 	pre: RespuestasCuestionario;
 	/** Respuestas de la evaluación final. */
