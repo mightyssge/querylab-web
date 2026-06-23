@@ -107,14 +107,23 @@ const temas = [
 	</section>
 
 	<!-- INCENTIVO / SORTEO -->
-	<div class="ql-raffle-wrap">
-		<div class="ql-raffle reveal" style="--d:60ms">
-			<span class="ql-raffle-ico"><Icon name="material-symbols:redeem-rounded" /></span>
-			<div class="ql-raffle-copy">
-				<span class="ql-raffle-tag">Incentivo</span>
-				<p class="ql-raffle-text">
-					Sorteamos <strong>S/ 50</strong> entre quienes completen <strong>todas las unidades</strong> del curso.
+	<div class="ql-promo-wrap">
+		<div class="ql-promo reveal" style="--d:60ms">
+			<div class="ql-promo-main">
+				<span class="ql-promo-badge"><Icon name="material-symbols:redeem-rounded" /> Sorteo</span>
+				<h2 class="ql-promo-title">Gana una gift card de <span class="ql-promo-hl">S/ 50</span></h2>
+				<p class="ql-promo-sub">
+					Completa <strong>las 2 unidades</strong> del curso y entras automáticamente al sorteo.
 				</p>
+				<a href="/unidad-1/" class="ql-promo-cta">
+					Quiero participar
+					<Icon name="material-symbols:arrow-forward-rounded" />
+				</a>
+			</div>
+			<div class="ql-promo-ticket" aria-hidden="true">
+				<span class="ql-promo-ticket-top">Premio</span>
+				<span class="ql-promo-ticket-amount">S/ 50</span>
+				<span class="ql-promo-ticket-bottom">gift card</span>
 			</div>
 		</div>
 	</div>
@@ -317,30 +326,60 @@ const temas = [
 	.ql-unit-link :global(svg) { width: 1.1em; height: 1.1em; }
 	.ql-unit-soon { font-weight: 700; color: var(--lt-ghost, #a89f90); }
 
-	/* Sorteo / incentivo */
-	.ql-raffle-wrap { display: flex; justify-content: center; padding: 1.25rem 1.5rem 0; }
-	.ql-raffle {
+	/* Promo / sorteo (incentivo destacado) */
+	.ql-promo-wrap { display: flex; justify-content: center; padding: 1.5rem 1.5rem 0; }
+	.ql-promo {
+		position: relative;
 		width: 100%; max-width: 1100px;
-		display: flex; align-items: center; gap: 1rem;
-		padding: 1rem 1.3rem;
-		background: linear-gradient(90deg, rgba(194, 145, 69, 0.16), rgba(15, 118, 110, 0.08));
-		border: 1px solid rgba(194, 145, 69, 0.45);
-		border-left: 4px solid #c29145;
+		display: flex; align-items: center; justify-content: space-between; gap: 1.5rem;
+		flex-wrap: wrap;
+		padding: 2rem 2.25rem;
+		background: linear-gradient(120deg, #0f766e 0%, #0b3b39 58%, #14302e 100%);
+		border: 1px solid rgba(194, 145, 69, 0.5);
+		box-shadow: 0 20px 50px -24px rgba(11, 59, 57, 0.85);
+		overflow: hidden;
 	}
-	.ql-raffle-ico {
-		display: grid; place-items: center; flex-shrink: 0;
-		width: 2.6rem; height: 2.6rem;
-		background: #c29145; color: #fff;
+	.ql-promo::before {
+		content: ""; position: absolute; top: -45%; right: -8%;
+		width: 360px; height: 360px; border-radius: 50%;
+		background: radial-gradient(circle, rgba(194, 145, 69, 0.28), transparent 70%);
+		pointer-events: none;
 	}
-	.ql-raffle-ico :global(svg) { width: 1.5rem; height: 1.5rem; }
-	.ql-raffle-copy { display: flex; flex-direction: column; gap: 0.15rem; min-width: 0; }
-	.ql-raffle-tag {
-		font-size: 0.66rem; font-weight: 800; text-transform: uppercase;
-		letter-spacing: 0.16em; color: #b07d29;
+	.ql-promo-main { position: relative; display: flex; flex-direction: column; gap: 0.65rem; min-width: 260px; flex: 1; }
+	.ql-promo-badge {
+		display: inline-flex; align-items: center; gap: 0.4rem; align-self: flex-start;
+		background: #c29145; color: #1a1305; font-weight: 800; font-size: 0.72rem;
+		text-transform: uppercase; letter-spacing: 0.14em; padding: 0.35rem 0.7rem;
 	}
-	.ql-raffle-text { margin: 0; font-size: 1rem; line-height: 1.45; color: var(--deep-text); }
-	.ql-raffle-text strong { color: #b07d29; font-weight: 800; }
-	@media (max-width: 520px) { .ql-raffle { align-items: flex-start; } }
+	.ql-promo-badge :global(svg) { width: 1.05em; height: 1.05em; }
+	.ql-promo-title { margin: 0; font-size: clamp(1.5rem, 3.2vw, 2.2rem); font-weight: 800; line-height: 1.1; color: #fff; }
+	.ql-promo-hl { color: #ecc178; }
+	.ql-promo-sub { margin: 0; font-size: 1.02rem; line-height: 1.5; color: rgba(237, 230, 214, 0.85); max-width: 46ch; }
+	.ql-promo-sub strong { color: #fff; }
+	.ql-promo-cta {
+		align-self: flex-start; margin-top: 0.35rem;
+		display: inline-flex; align-items: center; gap: 0.45rem;
+		background: #c29145; color: #1a1305; font-weight: 800; font-size: 0.95rem;
+		padding: 0.7rem 1.3rem; text-decoration: none;
+		transition: transform 0.15s, background 0.15s;
+	}
+	.ql-promo-cta:hover { transform: translateY(-2px); background: #d6a861; }
+	.ql-promo-cta :global(svg) { width: 1.1em; height: 1.1em; }
+	.ql-promo-ticket {
+		position: relative; flex-shrink: 0;
+		display: flex; flex-direction: column; align-items: center; justify-content: center;
+		min-width: 150px; padding: 1.1rem 1.6rem;
+		background: rgba(255, 255, 255, 0.06);
+		border: 2px dashed rgba(236, 193, 120, 0.7);
+		color: #fff;
+	}
+	.ql-promo-ticket-top { font-size: 0.62rem; font-weight: 800; letter-spacing: 0.2em; color: #ecc178; text-transform: uppercase; }
+	.ql-promo-ticket-amount { font-size: clamp(2rem, 5vw, 2.8rem); font-weight: 900; line-height: 1; color: #fff; }
+	.ql-promo-ticket-bottom { font-size: 0.72rem; letter-spacing: 0.1em; color: rgba(237, 230, 214, 0.7); text-transform: uppercase; }
+	@media (max-width: 640px) {
+		.ql-promo { flex-direction: column; align-items: stretch; padding: 1.5rem; }
+		.ql-promo-ticket { align-self: stretch; flex-direction: row; gap: 0.6rem; }
+	}
 
 	/* Temas del curso */
 	.ql-temas { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.6rem; }
