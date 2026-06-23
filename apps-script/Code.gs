@@ -3,7 +3,7 @@
  * ------------------------------------------------------
  * Recibe el envío consolidado de cada unidad y lo guarda como filas en una
  * Google Sheet. La hoja es el "ERP": cuentas participantes, ves quién terminó
- * (correo @aloe.ulima.edu.pe), comparas pre vs post y revisas qué ejercicios
+ * (por su correo), comparas pre vs post y revisas qué ejercicios
  * resolvió cada quien. Pestañas: Pre, Post, Ejercicios.
  *
  * Flujo nuevo: el front captura el diagnóstico inicial y los ejercicios en el

@@ -2,8 +2,8 @@
 
 Esta carpeta contiene el código del backend que recibe las respuestas de los
 formularios de la plataforma y las guarda en una **Google Sheet**. Esa hoja es
-tu **ERP**: ahí ves cuántas personas participan, quién terminó (por su correo
-`@ulima.edu.pe`) y puedes comparar pre vs post para medir el aprendizaje.
+tu **ERP**: ahí ves cuántas personas participan, quién terminó (por su correo)
+y puedes comparar pre vs post para medir el aprendizaje.
 
 No necesitas servidor: la web es estática y los formularios envían las respuestas
 directamente a este Web App desde el navegador.
@@ -35,17 +35,25 @@ PUBLIC_FORM_ENDPOINT="https://script.google.com/macros/s/XXXXXXXX/exec"
 
 Reinicia el servidor de desarrollo (`pnpm dev`). Listo: cada envío crea una fila.
 
+**En producción (Vercel):** la misma variable va en **Project → Settings →
+Environment Variables** como `PUBLIC_FORM_ENDPOINT` (Production y Preview). Como
+es `PUBLIC_`, se hornea en el build → hay que **redeployar** tras guardarla.
+
 > Mientras `PUBLIC_FORM_ENDPOINT` esté vacío, los formularios funcionan en
 > **modo demo** (validan y muestran éxito, pero no guardan nada).
 
 ## 4. Estructura de los datos
 
-El script crea automáticamente dos pestañas:
+Al terminar la unidad, la web envía **un solo POST consolidado** (`tipo:"final"`)
+con identidad + pre + post + ejercicios. El script lo reparte en tres pestañas que
+crea automáticamente:
 
-- **Pre** → respuestas de la encuesta pre.
-- **Post** → respuestas del formulario post (= alumno que terminó el sprint).
+- **Pre** → respuestas del diagnóstico inicial.
+- **Post** → respuestas de la evaluación final (= alumno que terminó la unidad).
+- **Ejercicios** → una fila por ejercicio resuelto en el sandbox.
 
-Columnas: `timestamp · sprint · nombre · correo · puntaje · q1..q5 · comentarios · recomienda · satisfaccion`.
+Columnas de Pre/Post: `timestamp · unidad · nombre · correo · puntaje · q1..q5 · comentarios · recomienda · satisfaccion`.
+La clave de respuestas (`CLAVE` en `Code.gs`) está separada por unidad: **1 = DDL**, **2 = DML**.
 
 ## 5. Cómo analizar (el ERP)
 
@@ -55,7 +63,7 @@ Columnas: `timestamp · sprint · nombre · correo · puntaje · q1..q5 · comen
   correo en Pre vs Post.
 - **Satisfacción / recomendación:** columnas `satisfaccion` y `recomienda` del Post.
 
-> Todos los correos deberían terminar en `@ulima.edu.pe` (la web lo valida antes de enviar).
+> Se acepta cualquier correo con formato válido; la web solo valida el formato antes de enviar.
 
 ## Nota sobre CORS
 

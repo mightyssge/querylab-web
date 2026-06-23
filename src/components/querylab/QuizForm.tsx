@@ -11,7 +11,7 @@ import {
 	type FinalPayload,
 	normalizeEmail,
 	submitFinal,
-	validateUlimaEmail,
+	validateEmail,
 } from "./lib/submit";
 import type { Question } from "./surveyData";
 
@@ -69,8 +69,8 @@ export default function QuizForm({ tipo, questions, lessonSlug, unidad }: Props)
 				return "Responde todas las preguntas antes de enviar.";
 		}
 		if (esPost) {
-			if (!validateUlimaEmail(correo))
-				return "Usa tu correo institucional que termina en @aloe.ulima.edu.pe.";
+			if (!validateEmail(correo))
+				return "Ingresa un correo electrónico válido.";
 			if (satisfaccion === 0) return "Indica tu nivel de satisfacción con la unidad.";
 		}
 		return null;
@@ -157,7 +157,7 @@ export default function QuizForm({ tipo, questions, lessonSlug, unidad }: Props)
 		);
 	}
 
-	const correoInvalido = esPost && estado === "error" && !validateUlimaEmail(correo);
+	const correoInvalido = esPost && estado === "error" && !validateEmail(correo);
 
 	return (
 		<form onSubmit={handleSubmit} className="ql-quiz" noValidate>
@@ -175,12 +175,12 @@ export default function QuizForm({ tipo, questions, lessonSlug, unidad }: Props)
 				</label>
 				{esPost && (
 					<label className="ql-field">
-						<span>Correo institucional (@aloe.ulima.edu.pe)</span>
+						<span>Correo electrónico</span>
 						<input
 							type="email"
 							value={correo}
 							onChange={(e) => setCorreo(e.target.value)}
-							placeholder="codigo@aloe.ulima.edu.pe"
+							placeholder="tucorreo@ejemplo.com"
 							autoComplete="email"
 							inputMode="email"
 							required

@@ -1,8 +1,8 @@
 // Helpers compartidos por los formularios y el sandbox de Query Lab.
 
-/** Correo institucional de estudiante: termina en @aloe.ulima.edu.pe. */
-export function validateUlimaEmail(email: string): boolean {
-	return /^[^@\s]+@aloe\.ulima\.edu\.pe$/i.test((email || "").trim());
+/** Acepta cualquier correo electrónico con formato válido. */
+export function validateEmail(email: string): boolean {
+	return /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test((email || "").trim());
 }
 
 /** Normaliza el correo para que sirva como llave estable (minúsculas, sin espacios). */
