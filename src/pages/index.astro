@@ -99,6 +99,19 @@ const unidades = [
 		</div>
 	</section>
 
+	<!-- INCENTIVO / SORTEO -->
+	<div class="ql-raffle-wrap">
+		<div class="ql-raffle reveal" style="--d:60ms">
+			<span class="ql-raffle-ico"><Icon name="material-symbols:redeem-rounded" /></span>
+			<div class="ql-raffle-copy">
+				<span class="ql-raffle-tag">Incentivo</span>
+				<p class="ql-raffle-text">
+					Sorteamos <strong>S/ 50</strong> entre quienes completen <strong>todas las unidades</strong> del curso.
+				</p>
+			</div>
+		</div>
+	</div>
+
 	<!-- CÓMO FUNCIONA -->
 	<section class="ql-section">
 		<div class="ql-wrap">
@@ -275,4 +288,29 @@ const unidades = [
 	.ql-unit-link:hover { gap: 0.6rem; }
 	.ql-unit-link :global(svg) { width: 1.1em; height: 1.1em; }
 	.ql-unit-soon { font-weight: 700; color: var(--lt-ghost, #a89f90); }
+
+	/* Sorteo / incentivo */
+	.ql-raffle-wrap { display: flex; justify-content: center; padding: 1.25rem 1.5rem 0; }
+	.ql-raffle {
+		width: 100%; max-width: 1100px;
+		display: flex; align-items: center; gap: 1rem;
+		padding: 1rem 1.3rem;
+		background: linear-gradient(90deg, rgba(194, 145, 69, 0.16), rgba(15, 118, 110, 0.08));
+		border: 1px solid rgba(194, 145, 69, 0.45);
+		border-left: 4px solid #c29145;
+	}
+	.ql-raffle-ico {
+		display: grid; place-items: center; flex-shrink: 0;
+		width: 2.6rem; height: 2.6rem;
+		background: #c29145; color: #fff;
+	}
+	.ql-raffle-ico :global(svg) { width: 1.5rem; height: 1.5rem; }
+	.ql-raffle-copy { display: flex; flex-direction: column; gap: 0.15rem; min-width: 0; }
+	.ql-raffle-tag {
+		font-size: 0.66rem; font-weight: 800; text-transform: uppercase;
+		letter-spacing: 0.16em; color: #b07d29;
+	}
+	.ql-raffle-text { margin: 0; font-size: 1rem; line-height: 1.45; color: var(--deep-text); }
+	.ql-raffle-text strong { color: #b07d29; font-weight: 800; }
+	@media (max-width: 520px) { .ql-raffle { align-items: flex-start; } }
 </style>
