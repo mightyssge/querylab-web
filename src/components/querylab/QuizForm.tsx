@@ -33,8 +33,8 @@ export default function QuizForm({ tipo, questions, lessonSlug, unidad }: Props)
 	const [nombre, setNombre] = useState("");
 	const [correo, setCorreo] = useState("");
 	const [answers, setAnswers] = useState<Record<string, number>>({});
-	const [satisfaccion, setSatisfaccion] = useState<number>(0);
-	const [recomienda, setRecomienda] = useState<string>("");
+	// const [satisfaccion, setSatisfaccion] = useState<number>(0);
+	// const [recomienda, setRecomienda] = useState<string>("");
 	const [comentarios, setComentarios] = useState("");
 	const [estado, setEstado] = useState<Estado>("idle");
 	const [errorMsg, setErrorMsg] = useState("");
@@ -72,7 +72,7 @@ export default function QuizForm({ tipo, questions, lessonSlug, unidad }: Props)
 		if (esPost) {
 			if (!validateEmail(correo))
 				return "Ingresa un correo electrónico válido.";
-			if (satisfaccion === 0) return "Indica tu nivel de satisfacción con la unidad.";
+			// if (satisfaccion === 0) return "Indica tu nivel de satisfacción con la unidad.";
 		}
 		return null;
 	}
@@ -121,8 +121,8 @@ export default function QuizForm({ tipo, questions, lessonSlug, unidad }: Props)
 			pre,
 			post,
 			ejercicios,
-			satisfaccion,
-			recomienda,
+			// satisfaccion,
+			// recomienda,
 			comentarios: comentarios.trim(),
 		};
 
@@ -130,7 +130,8 @@ export default function QuizForm({ tipo, questions, lessonSlug, unidad }: Props)
 		if (result.ok) {
 			guardarCorreo(correoNorm);
 			guardarNombre(nombre.trim());
-			track("envio_post", { satisfaccion, recomienda }, unidad);
+			// track("envio_post", { satisfaccion, recomienda }, unidad);
+			track("envio_post", {}, unidad);
 			marcarLeccion(lessonSlug);
 			setEstado("done");
 		} else {
@@ -233,7 +234,7 @@ export default function QuizForm({ tipo, questions, lessonSlug, unidad }: Props)
 
 			{esPost && (
 				<div className="ql-extra">
-					<fieldset className="ql-field">
+					{/* <fieldset className="ql-field">
 						<legend>¿Qué tan satisfecho quedaste con la unidad? (1 a 5)</legend>
 						<div className="ql-scale">
 							{[1, 2, 3, 4, 5].map((n) => (
@@ -269,7 +270,7 @@ export default function QuizForm({ tipo, questions, lessonSlug, unidad }: Props)
 								</label>
 							))}
 						</div>
-					</fieldset>
+					</fieldset> */}
 					<label className="ql-field">
 						<span>Comentarios (opcional)</span>
 						<textarea

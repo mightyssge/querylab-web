@@ -35,8 +35,8 @@ export interface FinalPayload {
 	post: RespuestasCuestionario;
 	/** Resultado de los ejercicios del sandbox de esta unidad: id -> aprobado. */
 	ejercicios: Record<string, boolean>;
-	satisfaccion: number;
-	recomienda: string;
+	// satisfaccion: number;
+	// recomienda: string;
 	comentarios: string;
 }
 
