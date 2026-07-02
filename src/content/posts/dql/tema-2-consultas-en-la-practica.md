@@ -1,5 +1,5 @@
 ---
-title: "Tema 2 · Consultas en la práctica (reportes del cine)"
+title: "Tema 3.2 · Consultas en la práctica (reportes del cine)"
 published: 2026-06-23
 description: "Resolvemos reportes reales de la cadena de cines paso a paso: recaudación por película, películas sin ventas y las más vendidas, usando JOINs, agregados y subconsultas. Acompaña al Video 2 de la Unidad 3."
 tags: ["SQL", "DQL", "Consultas", "Oracle"]

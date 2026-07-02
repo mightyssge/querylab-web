@@ -69,10 +69,9 @@ export default function ArchivePanel({ sortedPosts }: Props) {
 		return Object.keys(grouped)
 			.map((year) => ({
 				year: Number.parseInt(year, 10),
-				posts: grouped[Number.parseInt(year, 10)].sort(
-					(a, b) =>
-						new Date(b.data.published).getTime() -
-						new Date(a.data.published).getTime(),
+				// Orden por número de tema (1.1, 1.2, 2.1, …) usando el título.
+				posts: grouped[Number.parseInt(year, 10)].sort((a, b) =>
+					a.data.title.localeCompare(b.data.title, "es", { numeric: true }),
 				),
 			}))
 			.sort((a, b) => b.year - a.year);

@@ -1,5 +1,5 @@
 ---
-title: "Tema 2 · DML en la práctica (cadena de cines)"
+title: "Tema 2.2 · DML en la práctica (cadena de cines)"
 published: 2026-06-20
 description: "La operación diaria del cine en Oracle: vender entradas (INSERT), corregir precios (UPDATE con WHERE), anular ventas (DELETE) y deshacer errores con transacciones. Acompaña al Video 2 de la Unidad 2."
 tags: ["SQL", "DML", "Oracle"]

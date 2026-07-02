@@ -1,5 +1,5 @@
 ---
-title: "Tema 1 · Procesamiento de consultas (DQL)"
+title: "Tema 3.1 · Procesamiento de consultas (DQL)"
 published: 2026-06-23
 description: "SELECT, JOINs, subconsultas, operaciones de conjunto y funciones de agregado: cómo sacar respuestas de los datos. Acompaña al Video 1 de la Unidad 3."
 tags: ["SQL", "DQL", "Consultas", "Oracle"]

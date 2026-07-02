@@ -1,5 +1,5 @@
 ---
-title: "Tema 2 · DDL en la práctica (cadena de cines)"
+title: "Tema 1.2 · DDL en la práctica (cadena de cines)"
 published: 2026-06-16
 description: "Un caso real en Oracle: una cadena de cines. CREATE con reglas de negocio, ALTER en caliente y DROP con criterio. Acompaña al Video 2 de la Unidad 1."
 tags: ["SQL", "DDL", "Oracle"]

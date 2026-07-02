@@ -1,5 +1,5 @@
 ---
-title: "Tema 1 · Fundamentos de DDL"
+title: "Tema 1.1 · Fundamentos de DDL"
 published: 2026-06-16
 description: "Qué es el DDL y cómo CREATE, ALTER y DROP definen la estructura de una base de datos. Acompaña al Video 1 de la Unidad 1."
 tags: ["SQL", "DDL", "Oracle"]

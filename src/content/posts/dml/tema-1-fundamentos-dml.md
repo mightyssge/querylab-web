@@ -1,5 +1,5 @@
 ---
-title: "Tema 1 · Fundamentos de DML"
+title: "Tema 2.1 · Fundamentos de DML"
 published: 2026-06-20
 description: "Qué es el DML y cómo INSERT, UPDATE y DELETE mueven los datos de una base. El WHERE como red de seguridad y las transacciones (COMMIT/ROLLBACK). Acompaña al Video 1 de la Unidad 2."
 tags: ["SQL", "DML", "Oracle"]
