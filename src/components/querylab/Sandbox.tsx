@@ -3,6 +3,7 @@ import "./sandbox/sandbox.css";
 import { type EvalResult, evaluar } from "./sandbox/engine";
 import { EJERCICIOS } from "./sandbox/exercises";
 import { EJERCICIOS_DML } from "./sandbox/exercises-dml";
+import { EJERCICIOS_CONSULTAS } from "./sandbox/exercises-consultas";
 import {
 	leerProgreso,
 	marcarEjercicio,
@@ -13,6 +14,7 @@ import { track } from "../../scripts/track";
 const SETS = {
 	ddl: EJERCICIOS,
 	dml: EJERCICIOS_DML,
+	consultas: EJERCICIOS_CONSULTAS,
 } as const;
 
 export interface SandboxProps {

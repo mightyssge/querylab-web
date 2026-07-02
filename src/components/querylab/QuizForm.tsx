@@ -27,7 +27,7 @@ interface Props {
 type Estado = "idle" | "sending" | "error" | "done";
 
 // Prefijo de los ejercicios del sandbox por unidad (para consolidar solo los de esta unidad).
-const PREFIJO_EJERCICIOS: Record<number, string> = { 1: "ddl-", 2: "dml-" };
+const PREFIJO_EJERCICIOS: Record<number, string> = { 1: "ddl-", 2: "dml-", 3: "dql-" };
 
 export default function QuizForm({ tipo, questions, lessonSlug, unidad }: Props) {
 	const [nombre, setNombre] = useState("");

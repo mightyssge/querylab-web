@@ -130,7 +130,57 @@ export const UNIDAD_2: Unidad = {
 	],
 };
 
-export const UNIDADES: Unidad[] = [UNIDAD_1, UNIDAD_2];
+export const UNIDAD_3: Unidad = {
+	id: "unidad-3",
+	numero: 3,
+	titulo: "Consultas avanzadas + PL/SQL",
+	descripcion:
+		"Procesamiento de consultas (JOINs, subconsultas, conjuntos y agregados) y una introducción a PL/SQL para automatizar la base con procedimientos, funciones y triggers.",
+	basePath: "/unidad-3",
+	lecciones: [
+		{
+			slug: "evaluacion-inicial-dql",
+			titulo: "Evaluación inicial",
+			subtitulo: "Mide tu punto de partida en consultas",
+			tipo: "form-pre",
+			icon: "quiz",
+		},
+		{
+			slug: "consultas-avanzadas",
+			titulo: "Procesamiento de consultas",
+			subtitulo: "JOINs, subconsultas, conjuntos y agregados",
+			tipo: "leccion",
+			icon: "play-circle",
+			post: "dql/tema-1-consultas-avanzadas",
+			duracion: "2:30",
+		},
+		{
+			slug: "pl-sql",
+			titulo: "PL/SQL",
+			subtitulo: "Procedimientos, funciones y triggers",
+			tipo: "leccion",
+			icon: "play-circle",
+			post: "dql/tema-2-plsql",
+			duracion: "2:03",
+		},
+		{
+			slug: "practica-dql",
+			titulo: "Practica con el sandbox",
+			subtitulo: "8 ejercicios de consultas ejecutables",
+			tipo: "ejercicios",
+			icon: "terminal",
+		},
+		{
+			slug: "evaluacion-final-dql",
+			titulo: "Evaluación final",
+			subtitulo: "Mide lo aprendido y finaliza",
+			tipo: "form-post",
+			icon: "task-alt",
+		},
+	],
+};
+
+export const UNIDADES: Unidad[] = [UNIDAD_1, UNIDAD_2, UNIDAD_3];
 
 export function getLeccion(unidad: Unidad, slug: string): Leccion | undefined {
 	return unidad.lecciones.find((l) => l.slug === slug);

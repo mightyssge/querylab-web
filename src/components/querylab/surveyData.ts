@@ -233,3 +233,102 @@ export const POST_QUESTIONS_DML: Question[] = [
 		],
 	},
 ];
+
+// ─────────────── Unidad 3 · Procesamiento de consultas + PL/SQL ───────────────
+
+export const PRE_QUESTIONS_DQL: Question[] = [
+	{
+		id: "q1",
+		prompt: "¿Qué hace un INNER JOIN entre dos tablas?",
+		options: [
+			"Combina las filas que coinciden en ambas tablas por una columna común.",
+			"Elimina las filas duplicadas de una tabla.",
+			"Ordena los resultados de mayor a menor.",
+			"Crea una tabla nueva a partir de otra.",
+		],
+	},
+	{
+		id: "q2",
+		prompt: "Para saber cuántas ventas hay por cada película, ¿qué necesitas usar?",
+		options: ["Solo WHERE", "GROUP BY junto con COUNT", "ORDER BY", "DROP TABLE"],
+	},
+	{
+		id: "q3",
+		prompt: "¿Cuál es la diferencia entre WHERE y HAVING?",
+		options: [
+			"Son exactamente lo mismo.",
+			"WHERE filtra filas; HAVING filtra grupos (después de agregar).",
+			"HAVING filtra filas; WHERE filtra grupos.",
+			"HAVING solo funciona si hay un JOIN.",
+		],
+	},
+	{
+		id: "q4",
+		prompt: "Para obtener las películas que NO tienen ninguna venta, una opción válida es:",
+		options: [
+			"SELECT ... WHERE id_funcion IN (SELECT id_funcion FROM venta)",
+			"SELECT ... WHERE id_funcion NOT IN (SELECT id_funcion FROM venta)",
+			"DELETE FROM funcion WHERE ventas = 0",
+			"UPDATE funcion SET ventas = 0",
+		],
+	},
+	{
+		id: "q5",
+		prompt: "En PL/SQL, ¿qué es un trigger (disparador)?",
+		options: [
+			"Una consulta SELECT guardada.",
+			"Código que se ejecuta automáticamente ante un evento (INSERT/UPDATE/DELETE).",
+			"Una tabla temporal.",
+			"Un tipo de índice.",
+		],
+	},
+];
+
+export const POST_QUESTIONS_DQL: Question[] = [
+	{
+		id: "q1",
+		prompt: "¿Qué devuelve esta consulta?",
+		code: "SELECT f.pelicula, COUNT(*)\nFROM venta v\nJOIN funcion f ON v.id_funcion = f.id_funcion\nGROUP BY f.pelicula;",
+		options: [
+			"El total de ventas del cine en un solo número.",
+			"La cantidad de ventas por cada película.",
+			"Todas las filas de la tabla venta.",
+			"Las películas que no tienen ventas.",
+		],
+	},
+	{
+		id: "q2",
+		prompt: "Un LEFT JOIN entre funcion y venta sirve para:",
+		options: [
+			"Ver solo las funciones que tienen ventas.",
+			"Ver todas las funciones, incluso las que no tienen ninguna venta.",
+			"Eliminar las funciones sin ventas.",
+			"Ordenar las funciones por precio.",
+		],
+	},
+	{
+		id: "q3",
+		prompt: "¿Cuál cláusula filtra GRUPOS después de aplicar un agregado?",
+		options: ["WHERE", "HAVING", "ORDER BY", "JOIN"],
+	},
+	{
+		id: "q4",
+		prompt: "En PL/SQL, ¿qué construcción devuelve un valor y puede usarse dentro de un SELECT?",
+		options: [
+			"Un procedimiento (PROCEDURE)",
+			"Una función (FUNCTION)",
+			"Un trigger",
+			"Un COMMIT",
+		],
+	},
+	{
+		id: "q5",
+		prompt: "¿Para qué sirve un trigger BEFORE INSERT sobre la tabla venta?",
+		options: [
+			"Para consultar datos más rápido.",
+			"Para ejecutar lógica automáticamente antes de insertar (por ejemplo, validar la butaca).",
+			"Para crear la tabla venta.",
+			"Para ordenar los resultados de una consulta.",
+		],
+	},
+];

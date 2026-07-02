@@ -27,9 +27,15 @@ export interface Exercise {
 	starter: string;
 	/** Solución de referencia. */
 	solucion: string;
+	/**
+	 * Ejercicio de CONSULTA (DQL): en vez de validar el estado de la BD, se corre
+	 * la consulta del alumno y se compara su resultado con el de `solucion`.
+	 */
+	consulta?: boolean;
 	/** Una o más vistas para renderizar el resultado (tablas, estructura, restricciones…). */
-	mostrar: Vista[];
-	validar: (db: PGlite) => Promise<Validacion>;
+	mostrar?: Vista[];
+	/** Validador para ejercicios DDL/DML (no se usa en ejercicios de consulta). */
+	validar?: (db: PGlite) => Promise<Validacion>;
 }
 
 async function rows(db: PGlite, sql: string): Promise<Record<string, unknown>[]> {
