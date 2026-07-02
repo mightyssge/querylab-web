@@ -33,8 +33,8 @@ export default function QuizForm({ tipo, questions, lessonSlug, unidad }: Props)
 	const [nombre, setNombre] = useState("");
 	const [correo, setCorreo] = useState("");
 	const [answers, setAnswers] = useState<Record<string, number>>({});
-	// const [satisfaccion, setSatisfaccion] = useState<number>(0);
-	// const [recomienda, setRecomienda] = useState<string>("");
+	const [satisfaccion, setSatisfaccion] = useState<number>(0);
+	const [recomienda, setRecomienda] = useState<string>("");
 	const [comentarios, setComentarios] = useState("");
 	const [estado, setEstado] = useState<Estado>("idle");
 	const [errorMsg, setErrorMsg] = useState("");
@@ -72,7 +72,7 @@ export default function QuizForm({ tipo, questions, lessonSlug, unidad }: Props)
 		if (esPost) {
 			if (!validateEmail(correo))
 				return "Ingresa un correo electrónico válido.";
-			// if (satisfaccion === 0) return "Indica tu nivel de satisfacción con la unidad.";
+			if (unidad === 3 && satisfaccion === 0) return "Indica tu nivel de satisfacción con la unidad.";
 		}
 		return null;
 	}
@@ -121,8 +121,7 @@ export default function QuizForm({ tipo, questions, lessonSlug, unidad }: Props)
 			pre,
 			post,
 			ejercicios,
-			// satisfaccion,
-			// recomienda,
+			...(unidad === 3 && { satisfaccion, recomienda }),
 			comentarios: comentarios.trim(),
 		};
 
@@ -130,8 +129,11 @@ export default function QuizForm({ tipo, questions, lessonSlug, unidad }: Props)
 		if (result.ok) {
 			guardarCorreo(correoNorm);
 			guardarNombre(nombre.trim());
-			// track("envio_post", { satisfaccion, recomienda }, unidad);
-			track("envio_post", {}, unidad);
+			track(
+				"envio_post",
+				unidad === 3 ? { satisfaccion, recomienda } : {},
+				unidad,
+			);
 			marcarLeccion(lessonSlug);
 			setEstado("done");
 		} else {
@@ -234,43 +236,47 @@ export default function QuizForm({ tipo, questions, lessonSlug, unidad }: Props)
 
 			{esPost && (
 				<div className="ql-extra">
-					{/* <fieldset className="ql-field">
-						<legend>¿Qué tan satisfecho quedaste con la unidad? (1 a 5)</legend>
-						<div className="ql-scale">
-							{[1, 2, 3, 4, 5].map((n) => (
-								<button
-									type="button"
-									key={n}
-									className={`ql-scale-btn ${satisfaccion === n ? "is-selected" : ""}`}
-									onClick={() => setSatisfaccion(n)}
-									aria-pressed={satisfaccion === n}
-									aria-label={`${n} de 5`}
-								>
-									{n}
-								</button>
-							))}
-						</div>
-					</fieldset>
-					<fieldset className="ql-field">
-						<legend>¿Recomendarías este curso a otro estudiante?</legend>
-						<div className="ql-yesno" role="radiogroup">
-							{["Sí", "No"].map((v) => (
-								<label
-									key={v}
-									className={`ql-option ql-option-inline ${recomienda === v ? "is-selected" : ""}`}
-								>
-									<input
-										type="radio"
-										name="recomienda"
-										checked={recomienda === v}
-										onChange={() => setRecomienda(v)}
-									/>
-									<span className="ql-option-mark" aria-hidden="true"></span>
-									<span>{v}</span>
-								</label>
-							))}
-						</div>
-					</fieldset> */}
+					{unidad === 3 && (
+						<>
+							<fieldset className="ql-field">
+								<legend>¿Qué tan satisfecho quedaste con la unidad? (1 a 5)</legend>
+								<div className="ql-scale">
+									{[1, 2, 3, 4, 5].map((n) => (
+										<button
+											type="button"
+											key={n}
+											className={`ql-scale-btn ${satisfaccion === n ? "is-selected" : ""}`}
+											onClick={() => setSatisfaccion(n)}
+											aria-pressed={satisfaccion === n}
+											aria-label={`${n} de 5`}
+										>
+											{n}
+										</button>
+									))}
+								</div>
+							</fieldset>
+							<fieldset className="ql-field">
+								<legend>¿Recomendarías este curso a otro estudiante?</legend>
+								<div className="ql-yesno" role="radiogroup">
+									{["Sí", "No"].map((v) => (
+										<label
+											key={v}
+											className={`ql-option ql-option-inline ${recomienda === v ? "is-selected" : ""}`}
+										>
+											<input
+												type="radio"
+												name="recomienda"
+												checked={recomienda === v}
+												onChange={() => setRecomienda(v)}
+											/>
+											<span className="ql-option-mark" aria-hidden="true"></span>
+											<span>{v}</span>
+										</label>
+									))}
+								</div>
+							</fieldset>
+						</>
+					)}
 					<label className="ql-field">
 						<span>Comentarios (opcional)</span>
 						<textarea
