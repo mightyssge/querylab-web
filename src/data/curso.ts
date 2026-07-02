@@ -61,13 +61,13 @@ export const UNIDAD_1: Unidad = {
 			post: "ddl/tema-2-ddl-en-la-practica",
 			duracion: "8 min",
 		},
-		{
-			slug: "practica",
-			titulo: "Practica con el sandbox",
-			subtitulo: "10 ejercicios ejecutables",
-			tipo: "ejercicios",
-			icon: "terminal",
-		},
+		// {
+		// 	slug: "practica",
+		// 	titulo: "Practica con el sandbox",
+		// 	subtitulo: "10 ejercicios ejecutables",
+		// 	tipo: "ejercicios",
+		// 	icon: "terminal",
+		// },
 		{
 			slug: "evaluacion-final",
 			titulo: "Evaluación final",

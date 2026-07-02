@@ -2,7 +2,7 @@
 import { getEntry, render } from "astro:content";
 import MermaidLoader from "@components/MermaidLoader.astro";
 import QuizForm from "@components/querylab/QuizForm";
-import Sandbox from "@components/querylab/Sandbox";
+// import Sandbox from "@components/querylab/Sandbox";
 import "@components/querylab/querylab.css";
 import { POST_QUESTIONS, PRE_QUESTIONS } from "@components/querylab/surveyData";
 import { UNIDAD_1, getLeccion, navLeccion } from "../../data/curso";
@@ -68,9 +68,9 @@ const title = `${leccion.titulo} · Unidad ${unidad.numero}`;
 		{leccion.tipo === "form-post" && (
 			<QuizForm client:load tipo="post" questions={POST_QUESTIONS} lessonSlug={slug} unidad={1} />
 		)}
-		{leccion.tipo === "ejercicios" && (
+		{/* leccion.tipo === "ejercicios" && (
 			<Sandbox client:only="react" set="ddl" practicaSlug={slug} unidad={1} />
-		)}
+		) */}
 
 		<nav class="lec-nav">
 			{prev ? (
