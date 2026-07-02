@@ -133,9 +133,9 @@ export const UNIDAD_2: Unidad = {
 export const UNIDAD_3: Unidad = {
 	id: "unidad-3",
 	numero: 3,
-	titulo: "Consultas avanzadas + PL/SQL",
+	titulo: "Procesamiento de consultas",
 	descripcion:
-		"Procesamiento de consultas (JOINs, subconsultas, conjuntos y agregados) y una introducción a PL/SQL para automatizar la base con procedimientos, funciones y triggers.",
+		"Consultas para sacar respuestas de los datos: SELECT, JOINs, subconsultas, operaciones de conjunto y funciones de agregado, aplicadas al caso de la cadena de cines.",
 	basePath: "/unidad-3",
 	lecciones: [
 		{
@@ -155,12 +155,12 @@ export const UNIDAD_3: Unidad = {
 			duracion: "2:30",
 		},
 		{
-			slug: "pl-sql",
-			titulo: "PL/SQL",
-			subtitulo: "Procedimientos, funciones y triggers",
+			slug: "consultas-en-la-practica",
+			titulo: "Consultas en la práctica",
+			subtitulo: "Resolver reportes del cine paso a paso",
 			tipo: "leccion",
 			icon: "play-circle",
-			post: "dql/tema-2-plsql",
+			post: "dql/tema-2-consultas-en-la-practica",
 			duracion: "2:03",
 		},
 		{

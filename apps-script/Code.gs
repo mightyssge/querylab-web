@@ -30,7 +30,7 @@ var CAMPOS = {
 var CLAVE = {
 	1: { pre: [1, 2, 0, 1, 3], post: [3, 2, 2, 1, 1] }, // DDL
 	2: { pre: [1, 1, 2, 0, 1], post: [2, 2, 0, 2, 1] }, // DML
-	3: { pre: [0, 1, 1, 1, 1], post: [1, 1, 1, 1, 1] }, // DQL + PL/SQL
+	3: { pre: [0, 1, 1, 1, 1], post: [1, 1, 1, 1, 1] }, // DQL / procesamiento de consultas
 };
 
 function clavePara(unidad, tipo) {

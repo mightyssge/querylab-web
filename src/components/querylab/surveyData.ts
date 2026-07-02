@@ -274,12 +274,12 @@ export const PRE_QUESTIONS_DQL: Question[] = [
 	},
 	{
 		id: "q5",
-		prompt: "En PL/SQL, ¿qué es un trigger (disparador)?",
+		prompt: "En una subconsulta, ¿para qué sirve el operador EXISTS?",
 		options: [
-			"Una consulta SELECT guardada.",
-			"Código que se ejecuta automáticamente ante un evento (INSERT/UPDATE/DELETE).",
-			"Una tabla temporal.",
-			"Un tipo de índice.",
+			"Para ordenar los resultados de mayor a menor.",
+			"Para comprobar si la subconsulta devuelve al menos una fila.",
+			"Para sumar los valores de una columna.",
+			"Para crear una tabla temporal.",
 		],
 	},
 ];
@@ -313,22 +313,23 @@ export const POST_QUESTIONS_DQL: Question[] = [
 	},
 	{
 		id: "q4",
-		prompt: "En PL/SQL, ¿qué construcción devuelve un valor y puede usarse dentro de un SELECT?",
+		prompt: "¿Qué devuelve esta consulta?",
+		code: "SELECT pelicula\nFROM funcion\nWHERE id_funcion NOT IN (SELECT id_funcion FROM venta);",
 		options: [
-			"Un procedimiento (PROCEDURE)",
-			"Una función (FUNCTION)",
-			"Un trigger",
-			"Un COMMIT",
+			"Las películas con más ventas.",
+			"Las películas que NO tienen ninguna venta.",
+			"Todas las películas del cine.",
+			"Las ventas que no tienen película.",
 		],
 	},
 	{
 		id: "q5",
-		prompt: "¿Para qué sirve un trigger BEFORE INSERT sobre la tabla venta?",
+		prompt: "Para obtener cuánto recaudó cada película (la suma de sus ventas), necesitas:",
 		options: [
-			"Para consultar datos más rápido.",
-			"Para ejecutar lógica automáticamente antes de insertar (por ejemplo, validar la butaca).",
-			"Para crear la tabla venta.",
-			"Para ordenar los resultados de una consulta.",
+			"Solo un WHERE.",
+			"Un JOIN con GROUP BY y SUM.",
+			"Solo un ORDER BY.",
+			"Un DROP TABLE.",
 		],
 	},
 ];

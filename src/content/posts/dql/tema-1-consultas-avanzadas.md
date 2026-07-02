@@ -89,4 +89,4 @@ Combinan los resultados de dos consultas: `UNION` (une y quita duplicados), `INT
 
 ## En una frase
 
-DQL es el lenguaje de las **respuestas**: eliges (`SELECT`), filtras (`WHERE`), combinas (`JOIN`), resumes (`GROUP BY` + agregados) y anidas (subconsultas). De aquí salen los reportes y las decisiones. En el [Tema 2](/unidad-3/pl-sql/) vemos **PL/SQL**, para que la base no solo responda, sino que **actúe sola**.
+DQL es el lenguaje de las **respuestas**: eliges (`SELECT`), filtras (`WHERE`), combinas (`JOIN`), resumes (`GROUP BY` + agregados) y anidas (subconsultas). De aquí salen los reportes y las decisiones. En el [Tema 2](/unidad-3/consultas-en-la-practica/) lo llevamos al caso real: resolvemos **reportes de la cadena de cines** paso a paso.
