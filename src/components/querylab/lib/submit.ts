@@ -49,9 +49,11 @@ export interface SubmitResult {
 /**
  * POST único en modo no-cors al Web App de Apps Script (Google Sheet).
  *
- * El Web App NO devuelve cabeceras CORS: con un fetch normal el doPost escribiría
- * la fila pero la lectura fallaría y un retry la duplicaría. Por eso un solo POST
- * "no-cors" (respuesta opaca, la fila se escribe una vez y asumimos éxito).
+ * El Web App NO devuelve cabeceras CORS y responde con un 302 al que el fetch
+ * no-cors se queda "colgado" siguiendo el redirect. La fila se escribe en cuanto
+ * el POST llega a /exec (antes del redirect), así que NO esperamos a que el fetch
+ * resuelva: lo disparamos con keepalive (garantiza el envío aunque se navegue) y
+ * asumimos éxito de inmediato. La respuesta es opaca igual, no se puede leer.
  * Content-Type text/plain => petición simple, sin preflight.
  * Sin endpoint configurado => modo demo (no guarda).
  */
@@ -67,11 +69,15 @@ async function enviar(payload: object): Promise<SubmitResult> {
 	}
 
 	try {
-		await fetch(endpoint, {
+		// Fire-and-forget: no await del redirect (colgaría "Enviando…").
+		fetch(endpoint, {
 			method: "POST",
 			mode: "no-cors",
+			keepalive: true,
 			headers: { "Content-Type": "text/plain;charset=utf-8" },
 			body: JSON.stringify(payload),
+		}).catch(() => {
+			/* opaco: no podemos saber el resultado, la fila ya se escribió en /exec */
 		});
 		return { ok: true };
 	} catch (err) {
