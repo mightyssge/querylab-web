@@ -72,7 +72,7 @@ export default function QuizForm({ tipo, questions, lessonSlug, unidad }: Props)
 		if (esPost) {
 			if (!validateEmail(correo))
 				return "Ingresa un correo electrónico válido.";
-			if (unidad === 3 && satisfaccion === 0) return "Indica tu nivel de satisfacción con la unidad.";
+			if (satisfaccion === 0) return "Indica tu nivel de satisfacción con la unidad.";
 		}
 		return null;
 	}
@@ -121,7 +121,8 @@ export default function QuizForm({ tipo, questions, lessonSlug, unidad }: Props)
 			pre,
 			post,
 			ejercicios,
-			...(unidad === 3 && { satisfaccion, recomienda }),
+			satisfaccion,
+			recomienda,
 			comentarios: comentarios.trim(),
 		};
 
@@ -131,7 +132,7 @@ export default function QuizForm({ tipo, questions, lessonSlug, unidad }: Props)
 			guardarNombre(nombre.trim());
 			track(
 				"envio_post",
-				unidad === 3 ? { satisfaccion, recomienda } : {},
+				{ satisfaccion, recomienda },
 				unidad,
 			);
 			marcarLeccion(lessonSlug);
@@ -236,7 +237,7 @@ export default function QuizForm({ tipo, questions, lessonSlug, unidad }: Props)
 
 			{esPost && (
 				<div className="ql-extra">
-					{unidad === 3 && (
+					{(
 						<>
 							<fieldset className="ql-field">
 								<legend>¿Qué tan satisfecho quedaste con la unidad? (1 a 5)</legend>
